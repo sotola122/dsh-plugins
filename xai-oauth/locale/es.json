@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Inicio de sesión de xAI",
+    "description": "Inicie sesión en xAI (SuperGrok / X Premium) mediante el flujo OAuth de pi-ai y use modelos de xAI sin una clave de API."
+  }
+}

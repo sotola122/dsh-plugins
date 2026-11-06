@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Partage de session",
+    "description": "Marque en lecture seule dans ce navigateur une session qu'un autre processus DSH est en train d'écrire, et retire la marque lorsque ce processus la libère."
+  }
+}

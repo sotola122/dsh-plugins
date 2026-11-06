@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/web-search-exa/README.md
+/:
+  en: d14bf496a87024b9
+  zh: d14bf496a87024b9
+/anago-harness-web-search-exa:
+  en: 93791f19f82d4555
+  zh: 6b9272face0a162d
+/anago-harness-web-search-exa/summary:
+  en: f900b09621d143e7
+  zh: 37143e0bf749da61
+/anago-harness-web-search-exa/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-web-search-exa/use-this-package:
+  en: c65a7a5928f06d93
+  zh: 8ab486ad92037905
+/anago-harness-web-search-exa/use-this-package/key-resolution-order:
+  en: 0c9597b0a7c7528e
+  zh: f628a7f72a99c100
+/anago-harness-web-search-exa/use-this-package/configuration:
+  en: e8e1c95a4c47f9d4
+  zh: 52f488e37c4cd584
+/anago-harness-web-search-exa/use-this-package/error-codes:
+  en: 200a82a60e7b58a6
+  zh: f7cdd164f3dd15dd
+/anago-harness-web-search-exa/understand-the-implementation:
+  en: c619d5f978eeb7c4
+  zh: 3242fc199e4d645d
+/anago-harness-web-search-exa/further-exploration:
+  en: b864bedb2df55e92
+  zh: 328beadf078c5d6b
+/anago-harness-web-search-exa/model-experience:
+  en: b6937a52881060b1
+  zh: a780f157375a696f
+/anago-harness-web-search-exa/model-experience/kv-cache-effect:
+  en: 27c67e7c1d7c5025
+  zh: bba4175583361440
+/anago-harness-web-search-exa/known-limitations-and-deferred-work:
+  en: ef29472097b1ae74
+  zh: f9d4c4cba6f377c5
+/anago-harness-web-search-exa/known-limitations-and-deferred-work/dev-note:
+  en: eee6aed34ea6b064
+  zh: 09fb588d447d2e0e

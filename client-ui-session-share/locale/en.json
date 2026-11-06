@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session sharing",
+    "description": "Marks a Session another DSH process is writing as read-only in this browser, and clears the mark when that process releases it."
+  }
+}

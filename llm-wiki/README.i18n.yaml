@@ -1,0 +1,58 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/llm-wiki/README.md
+/:
+  en: 3c2f6318c4ed8674
+  zh: 3c2f6318c4ed8674
+/anago-harness-llm-wiki:
+  en: a55bb9db171eebee
+  zh: 060e3f871ff7a026
+/anago-harness-llm-wiki/summary:
+  en: 78630c2fd9225033
+  zh: 1842c59c34b8b2fe
+/anago-harness-llm-wiki/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-llm-wiki/use-this-package:
+  en: e864bf259bb4da10
+  zh: d6abd479bd5f78ed
+/anago-harness-llm-wiki/use-this-package/two-wikis-two-write-paths:
+  en: fc39bd3bf828eb71
+  zh: 1fca6a540830577e
+/anago-harness-llm-wiki/use-this-package/mount-configuration:
+  en: 1028bcf31ec17479
+  zh: 46a1efc33dafd0a5
+/anago-harness-llm-wiki/use-this-package/tools-and-commands:
+  en: ec87dadb1b439f7a
+  zh: e0e4edb97413677e
+/anago-harness-llm-wiki/use-this-package/the-raw-write-guard:
+  en: c65f76bf6f2fc6d2
+  zh: a9cef3aee1451ba4
+/anago-harness-llm-wiki/understand-the-implementation:
+  en: ad1bfc94377b482d
+  zh: 39bcb0873cc08600
+/anago-harness-llm-wiki/further-exploration:
+  en: 4b7c422f6123f1c1
+  zh: ef823c44a8ecbef5
+/anago-harness-llm-wiki/model-experience:
+  en: 215e7ba838619b7b
+  zh: a311da3843709f90
+/anago-harness-llm-wiki/model-experience/wiki-tools-and-the-existence-notice:
+  en: 918f01e2c5f552e5
+  zh: 85c7fbe59ca271eb
+/anago-harness-llm-wiki/model-experience/wiki-tools-and-the-existence-notice/what-the-model-sees:
+  en: 8b104f3985aa4b36
+  zh: 12e6ce3f034729bb
+/anago-harness-llm-wiki/model-experience/wiki-tools-and-the-existence-notice/token-effect:
+  en: 2eee2d13b9b0dedc
+  zh: afd1b0442c86884f
+/anago-harness-llm-wiki/model-experience/wiki-tools-and-the-existence-notice/kv-cache-effect:
+  en: 1043261e28af8dd8
+  zh: 1448909992f06637
+/anago-harness-llm-wiki/known-limitations-and-deferred-work:
+  en: a65e2a0bb7526084
+  zh: e27eedd79e3a440a
+/anago-harness-llm-wiki/known-limitations-and-deferred-work/dev-note:
+  en: e4d95cd1ccf9ead9
+  zh: c42b1ee583399648

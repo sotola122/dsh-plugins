@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Response language",
+    "description": "Fixed Japanese-response instruction injected as a global system-prompt section."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "anago-core",
+    "description": "Couche de capacités de l'hôte pour les profils anago : mémoire, wiki, langue de réponse, et recherche Exa et Brave."
+  }
+}

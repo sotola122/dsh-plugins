@@ -1,0 +1,34 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/fork-policy/README.md
+/:
+  en: f36d4e4441530d83
+  zh: 6f12505eb1dd9c6d
+/anago-harness-fork-policy:
+  en: 7474f21c098c0e9c
+  zh: be9c4af0333d6fdd
+/anago-harness-fork-policy/summary:
+  en: cc186dc2a9204157
+  zh: 07d39b76a3a57ebc
+/anago-harness-fork-policy/table-of-contents:
+  en: 5db0ae01d50cb0e4
+  zh: a12a31e05c1afef7
+/anago-harness-fork-policy/use-this-package:
+  en: b45ff91ab41d60fd
+  zh: fc4af1e418f7db91
+/anago-harness-fork-policy/understand-the-implementation:
+  en: 65effe04dcbcde64
+  zh: 6e3c8f296cd1c36a
+/anago-harness-fork-policy/understand-the-implementation/source-map:
+  en: f27c4cc1d3edb90d
+  zh: afb2e4fc74820944
+/anago-harness-fork-policy/further-exploration:
+  en: cc9981eff6879e57
+  zh: 6269e1d9efea2e80
+/anago-harness-fork-policy/known-limitations-and-deferred-work:
+  en: 24400032f2ffae33
+  zh: 9578c386106df586
+/anago-harness-fork-policy/known-limitations-and-deferred-work/dev-note:
+  en: e67f633dc6fe7773
+  zh: 8ec3e73528ddb1a6

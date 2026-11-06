@@ -1,0 +1,52 @@
+{
+  "name": "@anago-harness/anago-core",
+  "description": "Host capability layer for anago profiles: memory, wiki, response language, Exa and Brave search.",
+  "version": "0.2.2-rc.1",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "icon.svg",
+    "locale/*.json",
+    "lib/index.js",
+    "cordis.patch.yml",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "icon": "./icon.svg",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "@anago-harness/llm-wiki": "workspace:*",
+    "@anago-harness/memory": "workspace:*",
+    "@anago-harness/response-language": "workspace:*",
+    "@anago-harness/web-search-brave": "workspace:*",
+    "@anago-harness/web-search-exa": "workspace:*",
+    "@deepseek-ai/dsh-web": "workspace:*"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:~"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "workspace:~"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sotola122/dsh-plugins.git",
+    "directory": "anago-core"
+  }
+}

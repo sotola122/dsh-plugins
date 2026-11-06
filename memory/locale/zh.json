@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "agent 记忆",
+    "description": "跨会话保留的 agent 记忆：全局与工作区存储、memory 工具，以及注入的快照。"
+  }
+}

@@ -1,0 +1,5 @@
+# copilot-oauth: sign in to GitHub Copilot through the pi-ai flow that
+# `llm-pi-ai` already registers for its `github-copilot` catalog provider.
+- insert:
+    - id: copilot-oauth
+      name: '@anago-harness/copilot-oauth'

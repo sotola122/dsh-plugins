@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenAI Codex サインイン",
+    "description": "pi-ai の OAuth フローで OpenAI Codex（ChatGPT Plus/Pro）にサインインし、API キーなしで Codex モデルを使います。"
+  }
+}

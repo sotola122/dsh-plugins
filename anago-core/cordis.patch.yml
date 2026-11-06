@@ -1,0 +1,55 @@
+# anago-core: the fork's host capabilities over dsh-base. The plugin packages
+# stay plain plugins; this bundle owns the rows.
+- insert:
+    - id: memory
+      name: '@anago-harness/memory'
+    - id: llm-wiki
+      name: '@anago-harness/llm-wiki'
+      config:
+        # The knowledge repository keeps its pages under concepts/.
+        global:
+          pagesDir: concepts
+    - id: response-language
+      name: '@anago-harness/response-language'
+      config:
+        enabled: true
+    - id: web-search-exa
+      name: '@anago-harness/web-search-exa'
+      config:
+        apiKeyEnv: EXA_API_KEY
+    - id: web-search-brave
+      name: '@anago-harness/web-search-brave'
+      config:
+        apiKeyEnv: BRAVE_API_KEY
+
+# The fork's default search provider. A non-insert patch replaces the row's
+# `config` wholesale, so `fetchProvider` is restated.
+- id: web
+  name: '@deepseek-ai/dsh-web'
+  config:
+    searchProvider: exa
+    fetchProvider: http
+
+# Remove DeepSeek account, feedback, telemetry, and upload rows. The browser
+# cannot use the Node egress guard, so a row that links to platform.deepseek.com
+# or api.deepseek.com must be absent from the composition, not merely blocked.
+- id: deepseek-account
+  disabled: true
+- id: llm-deepseek-account
+  disabled: true
+- id: command-feedback
+  disabled: true
+- id: session-telemetry-otel
+  disabled: true
+- id: plugin-package-inventory-deepseek
+  disabled: true
+- id: web-search-deepseek
+  disabled: true
+- id: web-deepseek-api
+  disabled: true
+- id: deepseek-llm-api-extensions
+  disabled: true
+- id: llm-deepseek
+  disabled: true
+- id: session-log-deepseek
+  disabled: true

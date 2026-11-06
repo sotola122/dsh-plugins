@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Connexion à OpenAI Codex",
+    "description": "Connectez-vous à OpenAI Codex (ChatGPT Plus/Pro) via le flux OAuth de pi-ai et utilisez les modèles Codex sans clé d’API."
+  }
+}

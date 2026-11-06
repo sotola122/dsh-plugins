@@ -1,0 +1,29 @@
+{
+  "name": "@anago-harness/fork-policy",
+  "description": "Node egress guard for harness-initiated hosts, plus fork profile patch lists",
+  "version": "0.2.2-rc.1",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/types/**/*.d.ts",
+    "egress-guard.cjs",
+    "denylist.json"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sotola122/dsh-plugins.git",
+    "directory": "fork-policy"
+  }
+}

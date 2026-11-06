@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Uso dos provedores",
+    "description": "Adiciona às configurações uma página de uso com a cota de cada provedor de LLM ou o motivo pelo qual ela não pode ser lida."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Sitzungsfreigabe",
+    "description": "Markiert eine Sitzung, die ein anderer DSH-Prozess schreibt, in diesem Browser als schreibgeschützt und entfernt die Markierung, wenn dieser Prozess sie freigibt."
+  }
+}

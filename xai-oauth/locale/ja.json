@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "xAI サインイン",
+    "description": "pi-ai の OAuth フローで xAI（SuperGrok / X Premium）にサインインし、API キーなしで xAI モデルを使います。"
+  }
+}

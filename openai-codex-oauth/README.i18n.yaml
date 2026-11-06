@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/openai-codex-oauth/README.md
+/:
+  en: dd07825b9ff83b89
+  zh: 96782ef82a18eafd
+/anago-harness-openai-codex-oauth:
+  en: fa8d4e390657e19c
+  zh: f98e5060ede4990c
+/anago-harness-openai-codex-oauth/summary:
+  en: 60d5541b5df1fdb1
+  zh: 9ef512f73aedbf13
+/anago-harness-openai-codex-oauth/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: c9246108bd07f3aa
+/anago-harness-openai-codex-oauth/use-this-package:
+  en: 75c4e37b56d37634
+  zh: 5a91c1072edca2fa
+/anago-harness-openai-codex-oauth/understand-the-implementation:
+  en: e8f4266f6fb95fa3
+  zh: 78ff4cfb35a5ea8f
+/anago-harness-openai-codex-oauth/further-exploration:
+  en: 3331137d239a67e7
+  zh: ff7c249ba987c897
+/anago-harness-openai-codex-oauth/model-experience:
+  en: 0d5ae049888c4574
+  zh: 76f417f7af64d03a
+/anago-harness-openai-codex-oauth/model-experience/kv-cache-effect:
+  en: 271e3a718eeeeb7e
+  zh: 892c09afa194f2c6
+/anago-harness-openai-codex-oauth/known-limitations-and-deferred-work:
+  en: b5844a567a34fa11
+  zh: 44edb17862956d3a
+/anago-harness-openai-codex-oauth/known-limitations-and-deferred-work/dev-note:
+  en: 33421501a2f1115d
+  zh: 2d4740e5f7a7d090

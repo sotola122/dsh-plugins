@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Mémoire de l'agent",
+    "description": "Mémoire persistante de l'agent : magasins global et d'espace de travail, l'outil memory et des instantanés injectés."
+  }
+}

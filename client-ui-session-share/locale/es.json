@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Uso compartido de sesiones",
+    "description": "Marca como de solo lectura en este navegador una sesión que otro proceso de DSH está escribiendo, y quita la marca cuando ese proceso la libera."
+  }
+}

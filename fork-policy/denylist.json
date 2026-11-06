@@ -1,0 +1,15 @@
+{
+  "$comment": "Anago Harness egress denylist: only hosts the harness itself hardcodes for its own built-in (non-user-initiated) traffic. Matching is on the normalized ASCII hostname: exact host, or a suffix and any of its subdomains.",
+  "suffixes": {
+    "deepseek-telemetry": ["deepseeksvc.com"],
+    "deepseek-npm-registry": ["harnessment.com"],
+    "npmmirror": ["npmmirror.com"],
+    "hf-mirror": ["hf-mirror.com"]
+  },
+  "hosts": [
+    "platform.deepseek.com",
+    "download.deepseek.com",
+    "download-test.deepseek.com",
+    "trtgsjkv6r.feishu.cn"
+  ]
+}

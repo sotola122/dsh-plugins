@@ -1,0 +1,11 @@
+{
+  "name": "dsh-plugins",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Anago fork plugins for DeepSeek Harness: provider backends, client UI surfaces, and memory/wiki tools.",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@11.28.5",
+  "engines": {
+    "node": ">=24.9.0"
+  }
+}

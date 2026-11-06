@@ -1,0 +1,49 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/client-ui-fonts-anago/README.md
+/:
+  en: 91582759751bdb65
+  zh: dd7d23308d85e264
+/anago-harness-client-ui-fonts-anago:
+  en: 1272418a8ce14feb
+  zh: 238dabccc9ff3740
+/anago-harness-client-ui-fonts-anago/summary:
+  en: 9ed1e9087377f75a
+  zh: a90fe4b3de92a0c2
+/anago-harness-client-ui-fonts-anago/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-client-ui-fonts-anago/use-this-package:
+  en: 686786e7e06483df
+  zh: e49e93c4d0485385
+/anago-harness-client-ui-fonts-anago/use-this-package/choose-a-font-in-settings:
+  en: 80be2e8d2ad74694
+  zh: 032d2e3bf35e4ed6
+/anago-harness-client-ui-fonts-anago/understand-the-implementation:
+  en: a5e15c6d265a33a0
+  zh: 3d9085ceb5426b47
+/anago-harness-client-ui-fonts-anago/further-exploration:
+  en: 5bc2f68a60150b07
+  zh: dcd67e59035c0efb
+/anago-harness-client-ui-fonts-anago/model-experience:
+  en: 215e7ba838619b7b
+  zh: a311da3843709f90
+/anago-harness-client-ui-fonts-anago/model-experience/no-model-context-contribution:
+  en: fef2d7ffd357282c
+  zh: 8f0c433293f26203
+/anago-harness-client-ui-fonts-anago/model-experience/no-model-context-contribution/what-the-model-sees:
+  en: b61e12f1072d7fbd
+  zh: 9d8a9329f7d169d3
+/anago-harness-client-ui-fonts-anago/model-experience/no-model-context-contribution/token-effect:
+  en: a021831ff57572b0
+  zh: 0cf9ef80f67dbf51
+/anago-harness-client-ui-fonts-anago/model-experience/no-model-context-contribution/kv-cache-effect:
+  en: e5f089f4e73fc676
+  zh: cd3f66de1e6c358d
+/anago-harness-client-ui-fonts-anago/known-limitations-and-deferred-work:
+  en: 44b2197179b47abc
+  zh: c4c9447b2dfc861d
+/anago-harness-client-ui-fonts-anago/known-limitations-and-deferred-work/dev-note:
+  en: 475f794f0920f70b
+  zh: d8d35a7583a2bb51

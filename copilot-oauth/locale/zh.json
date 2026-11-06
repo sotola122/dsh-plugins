@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "GitHub Copilot 登录",
+    "description": "通过 pi-ai OAuth 流程登录 GitHub Copilot，无需 COPILOT_GITHUB_TOKEN 即可使用 Copilot 模型。"
+  }
+}

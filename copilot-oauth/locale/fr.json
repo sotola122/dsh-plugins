@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Connexion GitHub Copilot",
+    "description": "Connectez-vous à GitHub Copilot via le flux OAuth de pi-ai et utilisez les modèles Copilot sans COPILOT_GITHUB_TOKEN."
+  }
+}

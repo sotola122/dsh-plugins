@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Inicio de sesión de GitHub Copilot",
+    "description": "Inicie sesión en GitHub Copilot mediante el flujo OAuth de pi-ai y use modelos de Copilot sin COPILOT_GITHUB_TOKEN."
+  }
+}

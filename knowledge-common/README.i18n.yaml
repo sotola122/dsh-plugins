@@ -1,0 +1,31 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/knowledge-common/README.md
+/:
+  en: c9fd3eb235afe1cc
+  zh: 0af36286ed934836
+/anago-harness-knowledge-common:
+  en: 2532eaca16c6a7e7
+  zh: a840e953642736a1
+/anago-harness-knowledge-common/summary:
+  en: 0747a0f54d87cd43
+  zh: 5e2ef0cb817ab58e
+/anago-harness-knowledge-common/table-of-contents:
+  en: 80b31a934611cb4a
+  zh: 05f3f7f9cb2fd881
+/anago-harness-knowledge-common/use-this-package:
+  en: c746db841c8274d9
+  zh: 60fe4eb89e50c8d3
+/anago-harness-knowledge-common/understand-the-implementation:
+  en: dee4ef51a4c10e36
+  zh: 41172889f1663536
+/anago-harness-knowledge-common/further-exploration:
+  en: 9ea990b0b3cda7be
+  zh: 13e1a1c64f4905b7
+/anago-harness-knowledge-common/known-limitations-and-deferred-work:
+  en: 7b655ff76dc1d971
+  zh: 1872e7acb290dc8a
+/anago-harness-knowledge-common/known-limitations-and-deferred-work/dev-note:
+  en: e5b97b5d55d33c32
+  zh: 3a7d8ab43a3f4401

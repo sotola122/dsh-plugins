@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Anbieternutzung",
+    "description": "Fügt den Einstellungen eine Nutzungsseite hinzu, die das Kontingent jedes LLM-Anbieters oder den Grund zeigt, warum es nicht lesbar ist."
+  }
+}

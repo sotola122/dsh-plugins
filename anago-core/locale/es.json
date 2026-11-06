@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "anago-core",
+    "description": "Capa de capacidades del host para perfiles de anago: memoria, wiki, idioma de respuesta y búsqueda con Exa y Brave."
+  }
+}

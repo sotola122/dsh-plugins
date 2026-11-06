@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Idioma de respuesta",
+    "description": "Instrucción fija de responder en japonés, inyectada como una sección global del prompt del sistema."
+  }
+}

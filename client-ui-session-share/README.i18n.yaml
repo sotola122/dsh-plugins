@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/client-ui-session-share/README.md
+/:
+  en: ff7daa99c14097c2
+  zh: 28f9505b28a31473
+/anago-harness-client-ui-session-share:
+  en: 8be7a7ddb6108064
+  zh: df5fa09bf4decf6f
+/anago-harness-client-ui-session-share/summary:
+  en: f66288f7db8afabe
+  zh: bb57b898656fc624
+/anago-harness-client-ui-session-share/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-client-ui-session-share/use-this-package:
+  en: 8e65ab5f640f41d7
+  zh: b3009ddeafe2b49c
+/anago-harness-client-ui-session-share/understand-the-implementation:
+  en: 3fad18a6ff3c3de3
+  zh: 33e72ba876e96333
+/anago-harness-client-ui-session-share/further-exploration:
+  en: 1c463adb7a192056
+  zh: 1102e6a7696e8d1b
+/anago-harness-client-ui-session-share/model-experience:
+  en: 6a3dbcaf64861bc3
+  zh: 32398d17dde10d6a
+/anago-harness-client-ui-session-share/model-experience/kv-cache-effect:
+  en: e2f85380c6e5e150
+  zh: 47e8697f40a65eaa
+/anago-harness-client-ui-session-share/known-limitations-and-deferred-work:
+  en: 71eb29af6c6ff49b
+  zh: e23487a91560fd36
+/anago-harness-client-ui-session-share/known-limitations-and-deferred-work/dev-note:
+  en: 269ab37ac1d18b41
+  zh: 12556b21e34b3845

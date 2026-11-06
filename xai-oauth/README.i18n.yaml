@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/xai-oauth/README.md
+/:
+  en: 8a4234cf1c3e36bd
+  zh: 01261462f53223a2
+/anago-harness-xai-oauth:
+  en: de970df6f64ea453
+  zh: 0d02062261dc6d92
+/anago-harness-xai-oauth/summary:
+  en: 5dcaf2515ac9b3b7
+  zh: ed07852c7e75c8e3
+/anago-harness-xai-oauth/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: c9246108bd07f3aa
+/anago-harness-xai-oauth/use-this-package:
+  en: 737d7c2512b7f462
+  zh: 75c58064c09b8d1c
+/anago-harness-xai-oauth/understand-the-implementation:
+  en: 35f490bbf39276c5
+  zh: 02522eea68289165
+/anago-harness-xai-oauth/further-exploration:
+  en: 6b36f062c3d77a06
+  zh: 90a68e5f1ef52e28
+/anago-harness-xai-oauth/model-experience:
+  en: 0d5ae049888c4574
+  zh: 76f417f7af64d03a
+/anago-harness-xai-oauth/model-experience/kv-cache-effect:
+  en: 271e3a718eeeeb7e
+  zh: 892c09afa194f2c6
+/anago-harness-xai-oauth/known-limitations-and-deferred-work:
+  en: 56678bcffcacc3ef
+  zh: 1ed3e64e967d9c01
+/anago-harness-xai-oauth/known-limitations-and-deferred-work/dev-note:
+  en: 456cb7d46967dca3
+  zh: 2500dba4c878277a

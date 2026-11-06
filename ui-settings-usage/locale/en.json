@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Provider usage",
+    "description": "Adds a Usage page to Settings that shows each LLM provider's quota, or why it cannot be read."
+  }
+}

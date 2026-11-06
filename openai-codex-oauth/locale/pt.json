@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Início de sessão no OpenAI Codex",
+    "description": "Inicie sessão no OpenAI Codex (ChatGPT Plus/Pro) pelo fluxo OAuth do pi-ai e use os modelos Codex sem chave de API."
+  }
+}

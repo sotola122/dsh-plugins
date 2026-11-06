@@ -1,0 +1,85 @@
+/*
+ * Japanese-first faces for the Anago Web UI. UDEV Gothic draws kana, kanji, and
+ * full-width forms; Noto Sans JP is the broad fallback; Intel One Mono
+ * draws Latin and code. Each woff2 sits beside its SIL OFL 1.1 text in
+ * src/fonts/, and the client build inlines every file as a data URL so the
+ * bundle needs no font route. The `__DSH_FONT_*__` placeholders are replaced
+ * with those data URLs when the browser half mounts (src/client/styles.ts).
+ *
+ * UDEV Gothic is the unmodified upstream font (TTF converted to WOFF2, name
+ * table untouched). Its unicode-range stops before Latin on purpose: Latin
+ * falls through to Noto Sans JP in running text and to Intel One Mono in code.
+ */
+
+@font-face {
+  font-family: 'UDEV Gothic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(__DSH_FONT_UDEV_GOTHIC__) format('woff2');
+  unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+FE10-FE19, U+FF01-FF60, U+FF65-FF9F, U+2E80-2FDF, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(__DSH_FONT_NOTO_SANS_JP_LATIN__) format('woff2');
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20CF, U+2100-214F, U+2190-21FF, U+2200-22FF, U+2460-24FF, U+25A0-25FF, U+2600-26FF;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(__DSH_FONT_NOTO_SANS_JP_KANA__) format('woff2');
+  unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+FE10-FE19, U+FF01-FF60, U+FF65-FF9F;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(__DSH_FONT_NOTO_SANS_JP_KANJI__) format('woff2');
+  unicode-range: U+2E80-2FDF, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F;
+}
+
+@font-face {
+  font-family: 'Intel One Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(__DSH_FONT_INTEL_ONE_MONO_LATIN__) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Intel One Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(__DSH_FONT_INTEL_ONE_MONO_LATIN_EXT__) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Intel One Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(__DSH_FONT_INTEL_ONE_MONO_SYMBOLS__) format('woff2');
+  unicode-range: U+2000-2001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F;
+}
+
+/* The default stacks are not declared here: the browser half writes the
+ * operator-configured lists as `:root:root` tokens after this stylesheet, which
+ * keeps ui-theme's specificity rule so an explicit user font list still leads.
+ * This sheet only guarantees the app root inherits the text stack, so existing
+ * components need no font declaration of their own. */
+body,
+#root {
+  font-family: var(--dsw-font-family);
+}

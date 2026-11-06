@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/web-search-brave/README.md
+/:
+  en: e29d6f5430f86dbd
+  zh: e29d6f5430f86dbd
+/anago-harness-web-search-brave:
+  en: 5042514518309da4
+  zh: d8df373f2b54e8c1
+/anago-harness-web-search-brave/summary:
+  en: 3c9545e2875b8f1a
+  zh: 657736783ed13f4c
+/anago-harness-web-search-brave/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-web-search-brave/use-this-package:
+  en: a2a6d9932318bde1
+  zh: 614fd9c791aa99f2
+/anago-harness-web-search-brave/use-this-package/configuration:
+  en: 1316e4e017fcb6d3
+  zh: 2e1447ae66e1db1c
+/anago-harness-web-search-brave/use-this-package/api-key-handling:
+  en: 1f1acaebb68e4ce7
+  zh: caf42b5d6b1fb235
+/anago-harness-web-search-brave/use-this-package/error-codes:
+  en: c4f019e6aa59a364
+  zh: e92faf98eb5c2672
+/anago-harness-web-search-brave/understand-the-implementation:
+  en: 427e28570e276bcb
+  zh: fada3f69c50cf4eb
+/anago-harness-web-search-brave/further-exploration:
+  en: 26817405a52604d6
+  zh: dacd5c08188118e4
+/anago-harness-web-search-brave/model-experience:
+  en: 005ae22066f97605
+  zh: e2aaeef993bd4b9f
+/anago-harness-web-search-brave/model-experience/kv-cache-effect:
+  en: 27c67e7c1d7c5025
+  zh: bba4175583361440
+/anago-harness-web-search-brave/known-limitations-and-deferred-work:
+  en: 87c3f86e42315f0a
+  zh: d9d8a04aa4b667e3
+/anago-harness-web-search-brave/known-limitations-and-deferred-work/dev-note:
+  en: 0859362c339f4ddf
+  zh: 03879bfb4ea5bc31

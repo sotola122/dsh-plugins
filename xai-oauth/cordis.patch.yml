@@ -1,0 +1,5 @@
+# xai-oauth: sign in to xAI (SuperGrok / X Premium) through the pi-ai flow
+# that `llm-pi-ai` already registers for its `xai` catalog provider.
+- insert:
+    - id: xai-oauth
+      name: '@anago-harness/xai-oauth'

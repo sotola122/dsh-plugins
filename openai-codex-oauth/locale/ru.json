@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Вход в OpenAI Codex",
+    "description": "Войдите в OpenAI Codex (ChatGPT Plus/Pro) через OAuth-поток pi-ai и используйте модели Codex без API-ключа."
+  }
+}

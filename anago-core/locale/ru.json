@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "anago-core",
+    "description": "Слой возможностей хоста для профилей anago: память, wiki, язык ответа и поиск через Exa и Brave."
+  }
+}

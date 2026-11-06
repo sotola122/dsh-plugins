@@ -1,0 +1,5 @@
+# openai-codex-oauth: wraps the pi-ai `openai-codex` catalog provider flow
+# that `llm-pi-ai` already registers. This plugin does not register a flow.
+- insert:
+    - id: openai-codex-oauth
+      name: '@anago-harness/openai-codex-oauth'

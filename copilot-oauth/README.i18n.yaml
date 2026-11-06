@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/copilot-oauth/README.md
+/:
+  en: 86168e5edc49a821
+  zh: 0205dab250e98e28
+/anago-harness-copilot-oauth:
+  en: b8b4883d8eae9937
+  zh: 92703edb693af815
+/anago-harness-copilot-oauth/summary:
+  en: 2b07b1a0fe4573de
+  zh: 2124b869aa9e35af
+/anago-harness-copilot-oauth/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: c9246108bd07f3aa
+/anago-harness-copilot-oauth/use-this-package:
+  en: cc889479c6013a8d
+  zh: b40ebe5ff200b1a4
+/anago-harness-copilot-oauth/understand-the-implementation:
+  en: f8758b4d150cedeb
+  zh: 8002670a75a7e47c
+/anago-harness-copilot-oauth/further-exploration:
+  en: 93458f0ef1f344dd
+  zh: f26c85ae8dbb6eea
+/anago-harness-copilot-oauth/model-experience:
+  en: 0d5ae049888c4574
+  zh: 76f417f7af64d03a
+/anago-harness-copilot-oauth/model-experience/kv-cache-effect:
+  en: 271e3a718eeeeb7e
+  zh: 892c09afa194f2c6
+/anago-harness-copilot-oauth/known-limitations-and-deferred-work:
+  en: 8ec79e186c855b31
+  zh: ba59721f7c678e1b
+/anago-harness-copilot-oauth/known-limitations-and-deferred-work/dev-note:
+  en: e288c7d23b7e2998
+  zh: 139a2f2d16e58c41

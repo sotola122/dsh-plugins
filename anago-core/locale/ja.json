@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "anago-core",
+    "description": "anago プロファイル向けのホスト機能レイヤーです。記憶、wiki、応答言語、Exa と Brave の検索をまとめます。"
+  }
+}

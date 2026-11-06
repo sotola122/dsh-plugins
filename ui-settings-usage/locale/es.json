@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Uso de proveedores",
+    "description": "Añade a Ajustes una página de uso con la cuota de cada proveedor de LLM o el motivo por el que no se puede leer."
+  }
+}

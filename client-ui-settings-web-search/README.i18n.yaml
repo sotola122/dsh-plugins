@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/client-ui-settings-web-search/README.md
+/:
+  en: e328cbe74036593d
+  zh: f61a9e8685f19146
+/anago-harness-client-ui-settings-web-search:
+  en: 7bd22b620678fba2
+  zh: ecb065c51a58ecaa
+/anago-harness-client-ui-settings-web-search/summary:
+  en: c3bb3be655bac885
+  zh: 2715bf2a32842f7d
+/anago-harness-client-ui-settings-web-search/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-client-ui-settings-web-search/use-this-package:
+  en: 1e2698ba01df60e6
+  zh: f64a836cadacf89a
+/anago-harness-client-ui-settings-web-search/understand-the-implementation:
+  en: a052604cd887b75e
+  zh: 5b415b7d0a2982a8
+/anago-harness-client-ui-settings-web-search/further-exploration:
+  en: 72b4c3aa75e30084
+  zh: 4d2f57d5691e31ad
+/anago-harness-client-ui-settings-web-search/model-experience:
+  en: e4a1e3667bcafeac
+  zh: 1df2685669bbb4d0
+/anago-harness-client-ui-settings-web-search/model-experience/kv-cache-effect:
+  en: 0a01421d40b77e83
+  zh: 47e8697f40a65eaa
+/anago-harness-client-ui-settings-web-search/known-limitations-and-deferred-work:
+  en: 00a3644a0e685262
+  zh: 8305871bd9bd0c7c
+/anago-harness-client-ui-settings-web-search/known-limitations-and-deferred-work/dev-note:
+  en: ea6c30d6567c9582
+  zh: 2fea62952d79d710

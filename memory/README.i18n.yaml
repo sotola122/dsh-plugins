@@ -1,0 +1,73 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/memory/README.md
+/:
+  en: 0f8e0b92e4f1b3f1
+  zh: 0f8e0b92e4f1b3f1
+/anago-harness-memory:
+  en: fc92780f3c9c76c3
+  zh: 6332f9c39820e03a
+/anago-harness-memory/summary:
+  en: e58cb28828ba4979
+  zh: 3f8172c4b1a702c3
+/anago-harness-memory/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-memory/use-this-package:
+  en: c6fa998e1a599449
+  zh: df1c007178b331f7
+/anago-harness-memory/understand-the-implementation:
+  en: bc8bbe55845c75e7
+  zh: 0d12f5d30ecdbadf
+/anago-harness-memory/understand-the-implementation/source-map:
+  en: 16966c6828aeb2d4
+  zh: 3c978550004d855f
+/anago-harness-memory/further-exploration:
+  en: abba3f1498a0709d
+  zh: 24459c79d8c812ac
+/anago-harness-memory/model-experience:
+  en: 215e7ba838619b7b
+  zh: a311da3843709f90
+/anago-harness-memory/model-experience/memory-tool-and-results:
+  en: 7e5ed5e4543f9744
+  zh: 88cc8817095155de
+/anago-harness-memory/model-experience/memory-tool-and-results/what-the-model-sees:
+  en: 4a9ff21f78fd35c6
+  zh: 0f9807c7811249ff
+/anago-harness-memory/model-experience/memory-tool-and-results/token-effect:
+  en: d3dc385bee5a560c
+  zh: 67ae12f70d0a39cc
+/anago-harness-memory/model-experience/memory-tool-and-results/kv-cache-effect:
+  en: 2abc35bf36d6836d
+  zh: c11d2d5d12b8ff8c
+/anago-harness-memory/model-experience/injected-snapshot:
+  en: eb3437e7a1564513
+  zh: ff9dac62b4b57d81
+/anago-harness-memory/model-experience/injected-snapshot/what-the-model-sees:
+  en: 8bb04949f087b4b5
+  zh: d3c0372e0622fc33
+/anago-harness-memory/model-experience/injected-snapshot/token-effect:
+  en: 38d5a01942cc84b0
+  zh: 33caddbb61c6fde0
+/anago-harness-memory/model-experience/injected-snapshot/kv-cache-effect:
+  en: 75d0dbd027bbbc0a
+  zh: 087a954e1f8579bc
+/anago-harness-memory/model-experience/turn-end-review:
+  en: 6b6c9ab134d79726
+  zh: d1cc185850b8099f
+/anago-harness-memory/model-experience/turn-end-review/what-the-model-sees:
+  en: fc1ae61141d2be4d
+  zh: 2f97c1cca9c4fc61
+/anago-harness-memory/model-experience/turn-end-review/token-effect:
+  en: a55f88d4b8cfc697
+  zh: bc8d1bc2d2ad9b46
+/anago-harness-memory/model-experience/turn-end-review/kv-cache-effect:
+  en: 43c3564e16d30742
+  zh: 75e4111011ea4112
+/anago-harness-memory/known-limitations-and-deferred-work:
+  en: 3595c2400ec7cdd5
+  zh: f8e9a7482879e2b6
+/anago-harness-memory/known-limitations-and-deferred-work/dev-note:
+  en: 86c6f225f86892b3
+  zh: 5a723f0a16e14bcb

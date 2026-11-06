@@ -1,0 +1,6 @@
+# ui-settings-usage: the Settings page's provider usage section. A client half
+# attaches only to the row whose specifier is the bare package name. All config
+# fields are optional; the schema defaults apply.
+- insert:
+    - id: ui-settings-usage
+      name: '@anago-harness/ui-settings-usage'

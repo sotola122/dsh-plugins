@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Utilisation des fournisseurs",
+    "description": "Ajoute aux paramètres une page d’utilisation indiquant le quota de chaque fournisseur de LLM ou la raison pour laquelle il est illisible."
+  }
+}

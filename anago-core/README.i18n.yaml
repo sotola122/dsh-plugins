@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/anago-core/README.md
+/:
+  en: e580ad3bad40eaab
+  zh: 571a41b74c26107f
+/anago-harness-anago-core:
+  en: 40bb0bf95788c844
+  zh: 8b7c1899e56b6cbe
+/anago-harness-anago-core/summary:
+  en: 9a8d55d6e97f0563
+  zh: 564a9d02a7cecb0d
+/anago-harness-anago-core/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-anago-core/use-this-package:
+  en: 0d229ed4c844780f
+  zh: 0f83446b4c921465
+/anago-harness-anago-core/understand-the-implementation:
+  en: 93800ec4a7199159
+  zh: ca4a38ee1f65f1e6
+/anago-harness-anago-core/further-exploration:
+  en: 7abcbdd0c22577d1
+  zh: 80132b5b6d2fe22d
+/anago-harness-anago-core/model-experience:
+  en: f6c4d2609b5f4bb6
+  zh: 694849df6967b6de
+/anago-harness-anago-core/model-experience/kv-cache-effect:
+  en: e6e907c99df7cd0a
+  zh: 20419fc9320f8af3
+/anago-harness-anago-core/known-limitations-and-deferred-work:
+  en: e37d40d2685e1c31
+  zh: 7c8f59cad80b3f3e
+/anago-harness-anago-core/known-limitations-and-deferred-work/dev-note:
+  en: e67f633dc6fe7773
+  zh: 8ec3e73528ddb1a6

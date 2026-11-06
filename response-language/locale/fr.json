@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Langue de réponse",
+    "description": "Instruction fixe de répondre en japonais, injectée comme une section globale de l'invite système."
+  }
+}

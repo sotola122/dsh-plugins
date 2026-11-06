@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Вход в GitHub Copilot",
+    "description": "Войдите в GitHub Copilot через поток OAuth pi-ai и используйте модели Copilot без COPILOT_GITHUB_TOKEN."
+  }
+}

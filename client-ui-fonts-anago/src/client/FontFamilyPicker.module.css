@@ -1,0 +1,45 @@
+/* The picker takes the seat of ui-theme's font field and repeats its row width,
+ * breakpoint, and coarse-pointer text size. The select repeats the geometry and
+ * material of the Input primitive, so the two read as one control column. */
+
+.picker {
+  display: flex;
+  flex: 0 1 240px;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.select {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 0.5px solid var(--dsw-alias-border-l4);
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-bg-layer-1);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.select:focus-visible {
+  border-color: var(--dsw-alias-state-business-primary);
+}
+
+.field {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .picker {
+    flex-basis: auto;
+  }
+}
+
+@media (pointer: coarse) {
+  .select,
+  .field input {
+    font-size: 16px;
+  }
+}

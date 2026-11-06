@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Anago フォント",
+    "description": "日本語優先の Web UI フォントです。仮名、漢字、全角形式は UDEV Gothic、ラテン文字とコードは Intel One Mono、広いフォールバックは Noto Sans JP です。"
+  }
+}

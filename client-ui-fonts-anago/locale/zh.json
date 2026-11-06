@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Anago 字体",
+    "description": "日语优先的 Web UI 字体：UDEV Gothic 负责假名、汉字与全角形式，Intel One Mono 负责拉丁文字与代码，Noto Sans JP 作为覆盖更广的回退。"
+  }
+}

@@ -1,0 +1,70 @@
+# anago-web: the fork's browser layer over dsh-web-app.
+- insert:
+    # A client half attaches only to the row whose specifier is the bare
+    # package name.
+    - id: ui-session-share
+      name: '@anago-harness/client-ui-session-share'
+    - id: ui-settings-web-search-providers
+      name: '@anago-harness/client-ui-settings-web-search'
+
+# The upstream DeepSeek search card writes the same web.searchProvider field.
+# Disable it until the DeepSeek search rows are removed.
+- id: ui-settings-web-search
+  name: '@deepseek-ai/dsh-client-ui-settings-web-search'
+  disabled: true
+
+# The interface language follows the user's own choice: upstream's locale
+# settings row writes the preference and accepts any BCP-47 id, so the fork
+# pins none here.
+
+# Typography per interface. These lists become the default tokens the browser
+# applies; a user-selected font list still leads them. Omit a field to keep the
+# stack below, or set it to '' to keep ui-theme's built-in stack. The row is
+# new, so it needs an insert patch rather than an entry patch.
+- insert:
+    - id: anago-fonts
+      name: '@anago-harness/client-ui-fonts-anago'
+      config:
+        text: >-
+          'UDEV Gothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont,
+          'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+          'Helvetica Neue', Helvetica, Arial, sans-serif
+        code: >-
+          'Intel One Mono', 'UDEV Gothic', 'Noto Sans JP', 'SF Mono',
+          'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo,
+          Courier, 'PingFang SC', 'Microsoft YaHei'
+        terminal: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+
+# Opt a new web Session into child model selection. The card stores the
+# allowed routes; this row flag makes the tool instance read them. TUI profiles
+# do not mount the settings service, so the flag stays in the browser bundle.
+- id: tool-subagent
+  name: '@deepseek-ai/dsh-tool-subagent'
+  config:
+    provider: spawn
+    toolName: subagent
+    modelSelection: true
+
+# An idle Agent hands its Session write ownership back so any other DSH
+# process can open the same stored Session for writing: headless --session-id,
+# SDK/ACP resume, or a second Web process. The controller keeps the Agent
+# while a turn, queued inbox work, a live child Agent, or a background hold
+# is outstanding.
+- id: session-controller
+  name: '@deepseek-ai/dsh-api-session-controller'
+  config:
+    releaseOnIdle: true
+    releaseIdleDelayMs: 250
+
+# The account and message-feedback UI link to DeepSeek CN endpoints from the
+# browser, which the Node egress guard cannot intercept.
+# The host feedback row mounts with web-app, not base; the TUI profile must
+# not warn about a row it never had.
+- id: message-feedback
+  disabled: true
+- id: ui-settings-account
+  disabled: true
+- id: account-controller
+  disabled: true
+- id: ui-message-feedback
+  disabled: true

@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/response-language/README.md
+/:
+  en: b8cad2d57615c1c4
+  zh: b8cad2d57615c1c4
+/anago-harness-response-language:
+  en: 7e5a2af0ec78294d
+  zh: 9b2c12824e914e7e
+/anago-harness-response-language/summary:
+  en: fa8ccfbd3059a107
+  zh: f7f581ae8709c4dc
+/anago-harness-response-language/table-of-contents:
+  en: d152484eb41ac6b4
+  zh: 09388d293f9be9cb
+/anago-harness-response-language/use-this-package:
+  en: 6c721114df86be67
+  zh: b6569e9efd669b49
+/anago-harness-response-language/understand-the-implementation:
+  en: 2140e1250a7f89cb
+  zh: 9f45101c93aa9a4f
+/anago-harness-response-language/further-exploration:
+  en: 8d7c350823ac2732
+  zh: 2240db1130b1bc9e
+/anago-harness-response-language/model-experience:
+  en: 215e7ba838619b7b
+  zh: a311da3843709f90
+/anago-harness-response-language/model-experience/japanese-response-instruction:
+  en: 19b8dd0b2dea2c0a
+  zh: c8b1783bd9a72194
+/anago-harness-response-language/model-experience/japanese-response-instruction/what-the-model-sees:
+  en: 9b7ec0976e025e48
+  zh: ad85b3f223220e33
+/anago-harness-response-language/model-experience/japanese-response-instruction/token-effect:
+  en: 1180408e41c9fb9b
+  zh: af47a1a001afa835
+/anago-harness-response-language/model-experience/japanese-response-instruction/kv-cache-effect:
+  en: 7dce3d55597348d2
+  zh: 2ff7dd96a2c8ea68
+/anago-harness-response-language/known-limitations-and-deferred-work:
+  en: 7ae1e5740fbd23cc
+  zh: c3ca5c0e1fa30506
+/anago-harness-response-language/known-limitations-and-deferred-work/dev-note:
+  en: e67f633dc6fe7773
+  zh: 8ec3e73528ddb1a6

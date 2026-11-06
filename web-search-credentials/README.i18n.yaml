@@ -1,0 +1,31 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/fork/web-search-credentials/README.md
+/:
+  en: a4c24046eedfeaa8
+  zh: 50d5a510f72ec1c6
+/anago-harness-web-search-credentials:
+  en: 17fc77db78ad62b2
+  zh: 3b5082d767fefa89
+/anago-harness-web-search-credentials/summary:
+  en: 06bdc897b16e40dc
+  zh: 10d768ded214b1bd
+/anago-harness-web-search-credentials/table-of-contents:
+  en: 80b31a934611cb4a
+  zh: 05f3f7f9cb2fd881
+/anago-harness-web-search-credentials/use-this-package:
+  en: 95aedb97c016ecc8
+  zh: 030d99ca081e09c8
+/anago-harness-web-search-credentials/understand-the-implementation:
+  en: c8d5a5f0c94abbb9
+  zh: 3e7836df47723b17
+/anago-harness-web-search-credentials/further-exploration:
+  en: 50bea7f41eb7c608
+  zh: 3783d7280818809b
+/anago-harness-web-search-credentials/known-limitations-and-deferred-work:
+  en: ab190e79149ce298
+  zh: bd1b3c67ed135919
+/anago-harness-web-search-credentials/known-limitations-and-deferred-work/dev-note:
+  en: cbb6abb6de8f80d0
+  zh: ae55731b2765b9ce

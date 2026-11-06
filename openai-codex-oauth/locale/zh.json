@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenAI Codex 登录",
+    "description": "通过 pi-ai OAuth 流程登录 OpenAI Codex（ChatGPT Plus/Pro），无需 API key 即可使用 Codex 模型。"
+  }
+}

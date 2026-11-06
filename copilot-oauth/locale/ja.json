@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "GitHub Copilot サインイン",
+    "description": "pi-ai の OAuth フローで GitHub Copilot にサインインし、COPILOT_GITHUB_TOKEN なしで Copilot モデルを使います。"
+  }
+}

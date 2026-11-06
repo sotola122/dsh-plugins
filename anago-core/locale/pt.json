@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "anago-core",
+    "description": "Camada de capacidades do host para perfis anago: memória, wiki, idioma de resposta e pesquisa com Exa e Brave."
+  }
+}
