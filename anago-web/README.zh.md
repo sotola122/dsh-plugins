@@ -50,7 +50,7 @@ anago 配置的浏览器层：Plugins 页面上的 Exa 与 Brave 搜索设置卡
 ## 进一步探索
 
 - [fork 分组](../README.zh.md) — 本分组的包地图。
-- [捆绑插件设计](../../../ANAGO_PLUGINS_DESIGN.md) — 包划分与设置卡片。
+- [捆绑插件设计](../../ANAGO_PLUGINS_DESIGN.md) — 包划分与设置卡片。
 
 -----
 

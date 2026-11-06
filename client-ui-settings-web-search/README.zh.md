@@ -53,8 +53,8 @@ Node 半是空的 `apply`，仅让本包持有一个 Loader 行，使客户端�
 
 - [web-search-exa](../web-search-exa/README.zh.md) — Exa 卡片配置的提供方。
 - [web-search-brave](../web-search-brave/README.zh.md) — Brave 卡片配置的提供方。
-- [上游 web-search 卡片](../../client/ui-settings-web-search/README.zh.md) — 本包沿用其卡片形态。
-- [credentials](../../credentials/README.zh.md) — 密钥写入的存储。
+- [上游 web-search 卡片](../../packages/client/ui-settings-web-search/README.zh.md) — 本包沿用其卡片形态。
+- [credentials](../../packages/credentials/README.zh.md) — 密钥写入的存储。
 
 -----
 

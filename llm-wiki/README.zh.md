@@ -119,8 +119,8 @@ kind: "package-reference"
 - [fork 分组](../README.zh.md) — 包地图与随包发布的 profile bundle。
 - [knowledge-common](../knowledge-common/README.zh.md) — 本插件使用的共享原子写入、git、扫描和路径辅助模块。
 - [anago-core](../anago-core/README.zh.md) — 以 `global.pagesDir: concepts` 挂载本插件的 bundle 行。
-- [架构](../../../docs/architecture.zh.md) — 插件、注册表和工具策略如何组合在一起。
-- [工具目录](../../../docs/tool-catalog.zh.md) — `wiki_search`、`wiki_lint` 和 `wiki_write` 的生成描述。
+- [架构](../../docs/architecture.zh.md) — 插件、注册表和工具策略如何组合在一起。
+- [工具目录](../../docs/tool-catalog.zh.md) — `wiki_search`、`wiki_lint` 和 `wiki_write` 的生成描述。
 
 -----
 

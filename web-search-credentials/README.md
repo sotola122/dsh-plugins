@@ -76,8 +76,8 @@ const detail = boundedProviderDetail(redactSecret(String(error), key), 200)
 
 - [web-search-brave](../web-search-brave/README.md) — the Brave provider that reads the literal key, credentials service, and launch environment.
 - [web-search-exa](../web-search-exa/README.md) — the Exa provider that shares the same lookup order.
-- [credentials](../../credentials/credentials/README.md) — the reference grammar and the credentials service.
-- [launch environment](../../util/launch-environment/README.md) — the frozen launch-time environment the second reader uses.
+- [credentials](../../packages/credentials/credentials/README.md) — the reference grammar and the credentials service.
+- [launch environment](../../packages/util/launch-environment/README.md) — the frozen launch-time environment the second reader uses.
 
 -----
 

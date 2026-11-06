@@ -1,13 +1,13 @@
 # Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
 # section, a hash of its English and Chinese blocks outside code blocks and generated regions.
 # After editing either side, bring the other along and re-record with:
-#   pnpm run verify-translation-pairing --write packages/fork/openai-codex-oauth/README.md
+#   pnpm run verify-translation-pairing --write plugins/openai-codex-oauth/README.md
 /:
   en: dd07825b9ff83b89
   zh: 96782ef82a18eafd
 /anago-harness-openai-codex-oauth:
-  en: fa8d4e390657e19c
-  zh: f98e5060ede4990c
+  en: 06db757d50dcc4df
+  zh: f66718511fd3a947
 /anago-harness-openai-codex-oauth/summary:
   en: 60d5541b5df1fdb1
   zh: 9ef512f73aedbf13
@@ -21,8 +21,8 @@
   en: e8f4266f6fb95fa3
   zh: 78ff4cfb35a5ea8f
 /anago-harness-openai-codex-oauth/further-exploration:
-  en: 3331137d239a67e7
-  zh: ff7c249ba987c897
+  en: fee11062b47d3c46
+  zh: f42230dfeed9ea66
 /anago-harness-openai-codex-oauth/model-experience:
   en: 0d5ae049888c4574
   zh: 76f417f7af64d03a

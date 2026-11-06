@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib/types"
@@ -9,16 +9,16 @@
   ],
   "references": [
     {
-      "path": "../../../vendor/cordis"
+      "path": "../../vendor/cordis"
     },
     {
-      "path": "../../credentials/credentials"
+      "path": "../../packages/credentials/credentials"
     },
     {
-      "path": "../../util/launch-environment"
+      "path": "../../packages/util/launch-environment"
     },
     {
-      "path": "../../web/web"
+      "path": "../../packages/web/web"
     }
   ]
 }

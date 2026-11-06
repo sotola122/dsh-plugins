@@ -62,8 +62,8 @@ Copilot 授权先问一个文本问题（GitHub Enterprise 的 URL 或域名）�
 ## 进一步探索
 
 - [fork 组](../README.zh.md) — 本组的包地图。
-- [`llm-pi-ai`](../../llm/llm-pi-ai/README.zh.md) — 注册 GitHub Copilot 流程并在请求时读取记录的适配器。
-- [authorization 服务](../../credentials/authorization/README.zh.md) — 流程注册表与 `begin`/`cancel` 契约。
+- [`llm-pi-ai`](../../packages/llm/llm-pi-ai/README.zh.md) — 注册 GitHub Copilot 流程并在请求时读取记录的适配器。
+- [authorization 服务](../../packages/credentials/authorization/README.zh.md) — 流程注册表与 `begin`/`cancel` 契约。
 
 -----
 

@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib/types"
@@ -9,34 +9,34 @@
   ],
   "references": [
     {
-      "path": "../../../vendor/schemastery"
+      "path": "../../vendor/schemastery"
     },
     {
-      "path": "../../../vendor/cordis"
+      "path": "../../vendor/cordis"
     },
     {
-      "path": "../../core/agent"
+      "path": "../../packages/core/agent"
     },
     {
-      "path": "../../util/atomic-write"
+      "path": "../../packages/util/atomic-write"
     },
     {
-      "path": "../../interaction/commands"
+      "path": "../../packages/interaction/commands"
     },
     {
-      "path": "../../util/home-paths"
+      "path": "../../packages/util/home-paths"
     },
     {
-      "path": "../../llm/llm"
+      "path": "../../packages/llm/llm"
     },
     {
-      "path": "../../core/session"
+      "path": "../../packages/core/session"
     },
     {
-      "path": "../../skill/skill"
+      "path": "../../packages/skill/skill"
     },
     {
-      "path": "../../core/tools"
+      "path": "../../packages/core/tools"
     },
     {
       "path": "../knowledge-common"

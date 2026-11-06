@@ -53,8 +53,8 @@ The node half is an empty `apply`, present so the package holds a Loader row who
 
 - [web-search-exa](../web-search-exa/README.md) — the provider the Exa card configures.
 - [web-search-brave](../web-search-brave/README.md) — the provider the Brave card configures.
-- [upstream web-search card](../../client/ui-settings-web-search/README.md) — the card shape this package follows.
-- [credentials](../../credentials/README.md) — the store the keys are written to.
+- [upstream web-search card](../../packages/client/ui-settings-web-search/README.md) — the card shape this package follows.
+- [credentials](../../packages/credentials/README.md) — the store the keys are written to.
 
 -----
 

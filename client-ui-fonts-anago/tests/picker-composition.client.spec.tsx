@@ -7,11 +7,11 @@
  */
 import { act, cleanup, fireEvent, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { LocaleRuntime } from '../../../client/locale/src/client/index.ts'
+import { LocaleRuntime } from '../../../packages/client/locale/src/client/index.ts'
 import { SlotTestRuntime } from '@deepseek-ai/dsh-client-test-runtime'
-import { apply as settingsApply, inject as settingsInject } from '../../../client/ui-settings/src/client/index.ts'
-import { apply as themeApply, inject as themeInject } from '../../../client/ui-theme/src/client/index.ts'
-import { THEME_SETTINGS_NAMESPACE, ThemeSettingsSchema } from '../../../client/ui-theme/src/theme-settings.ts'
+import { apply as settingsApply, inject as settingsInject } from '../../../packages/client/ui-settings/src/client/index.ts'
+import { apply as themeApply, inject as themeInject } from '../../../packages/client/ui-theme/src/client/index.ts'
+import { THEME_SETTINGS_NAMESPACE, ThemeSettingsSchema } from '../../../packages/client/ui-theme/src/theme-settings.ts'
 import { FONT_CHOICES } from '../src/client/font-catalog.ts'
 
 vi.mock('../src/styles/fonts.css?inline', () => ({ default: '' }))

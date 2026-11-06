@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.client.json",
+  "extends": "../../tsconfig.base.client.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib/types",
@@ -11,31 +11,31 @@
   ],
   "references": [
     {
-      "path": "../../../vendor/cordis"
+      "path": "../../vendor/cordis"
     },
     {
-      "path": "../../api/remotes/tsconfig.client.json"
+      "path": "../../packages/api/remotes/tsconfig.client.json"
     },
     {
-      "path": "../../client/locale/tsconfig.client.json"
+      "path": "../../packages/client/locale/tsconfig.client.json"
     },
     {
-      "path": "../../client/store"
+      "path": "../../packages/client/store"
     },
     {
-      "path": "../../client/ui-primitives"
+      "path": "../../packages/client/ui-primitives"
     },
     {
-      "path": "../../client/ui-renderer"
+      "path": "../../packages/client/ui-renderer"
     },
     {
-      "path": "../../client/ui-settings/tsconfig.client.json"
+      "path": "../../packages/client/ui-settings/tsconfig.client.json"
     },
     {
-      "path": "../../client/ui-slots"
+      "path": "../../packages/client/ui-slots"
     },
     {
-      "path": "../../typert/protocol"
+      "path": "../../packages/typert/protocol"
     }
   ]
 }

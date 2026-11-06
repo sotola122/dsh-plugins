@@ -55,9 +55,9 @@ The node half is an empty `apply`, present so the package holds a Loader row who
 ## Further Exploration
 
 - [anago-web](../anago-web/README.md) — the bundle that inserts the row.
-- [session-controller](../../api/session-controller/README.md) — the Host ownership probe and the browser Session service.
-- [ui-conversation](../../client/ui-conversation/README.md) — the composer block registry this plugin writes.
-- [Design of the bundled plugins](../../../ANAGO_PLUGINS_DESIGN.md) — package split and the sharing rules.
+- [session-controller](../../packages/api/session-controller/README.md) — the Host ownership probe and the browser Session service.
+- [ui-conversation](../../packages/client/ui-conversation/README.md) — the composer block registry this plugin writes.
+- [Design of the bundled plugins](../../ANAGO_PLUGINS_DESIGN.md) — package split and the sharing rules.
 
 -----
 

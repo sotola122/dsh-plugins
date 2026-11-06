@@ -1,13 +1,13 @@
 # Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
 # section, a hash of its English and Chinese blocks outside code blocks and generated regions.
 # After editing either side, bring the other along and re-record with:
-#   pnpm run verify-translation-pairing --write packages/fork/web-search-brave/README.md
+#   pnpm run verify-translation-pairing --write plugins/web-search-brave/README.md
 /:
   en: e29d6f5430f86dbd
   zh: e29d6f5430f86dbd
 /anago-harness-web-search-brave:
-  en: 5042514518309da4
-  zh: d8df373f2b54e8c1
+  en: 1317e8e5984985e0
+  zh: d487f2ddafe0838f
 /anago-harness-web-search-brave/summary:
   en: 3c9545e2875b8f1a
   zh: 657736783ed13f4c
@@ -30,8 +30,8 @@
   en: 427e28570e276bcb
   zh: fada3f69c50cf4eb
 /anago-harness-web-search-brave/further-exploration:
-  en: 26817405a52604d6
-  zh: dacd5c08188118e4
+  en: 55c4f2c53307aca6
+  zh: c80f5d5d35855f04
 /anago-harness-web-search-brave/model-experience:
   en: 005ae22066f97605
   zh: e2aaeef993bd4b9f

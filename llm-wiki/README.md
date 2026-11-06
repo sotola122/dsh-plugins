@@ -119,8 +119,8 @@ The skill is a registration whose body is read from `SKILL.md` at plugin load; t
 - [fork group](../README.md) — the package map and the shipped profile bundles.
 - [knowledge-common](../knowledge-common/README.md) — the shared atomic-write, git, scan, and path helpers this plugin consumes.
 - [anago-core](../anago-core/README.md) — the bundle row that mounts this plugin with `global.pagesDir: concepts`.
-- [architecture](../../../docs/architecture.md) — how plugins, registries, and tool policies fit together.
-- [tool catalog](../../../docs/tool-catalog.md) — the generated descriptions of `wiki_search`, `wiki_lint`, and `wiki_write`.
+- [architecture](../../docs/architecture.md) — how plugins, registries, and tool policies fit together.
+- [tool catalog](../../docs/tool-catalog.md) — the generated descriptions of `wiki_search`, `wiki_lint`, and `wiki_write`.
 
 -----
 

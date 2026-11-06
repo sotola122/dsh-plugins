@@ -88,8 +88,8 @@ The browser half mounts the generated `./remote` contribution, then registers a 
 
 - [fork group](../README.md) — the package map for this group.
 - [`copilot-oauth`](../copilot-oauth/README.md) — the sign-in commands that produce the grant this package reads.
-- [`llm-pi-ai`](../../llm/llm-pi-ai/README.md) — the adapter that owns and refreshes the record.
-- [Typert protocol](../../typert/protocol/README.md) — how a Host method becomes the Remote the section calls.
+- [`llm-pi-ai`](../../packages/llm/llm-pi-ai/README.md) — the adapter that owns and refreshes the record.
+- [Typert protocol](../../packages/typert/protocol/README.md) — how a Host method becomes the Remote the section calls.
 
 -----
 

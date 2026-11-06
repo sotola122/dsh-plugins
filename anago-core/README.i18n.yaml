@@ -1,13 +1,13 @@
 # Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
 # section, a hash of its English and Chinese blocks outside code blocks and generated regions.
 # After editing either side, bring the other along and re-record with:
-#   pnpm run verify-translation-pairing --write packages/fork/anago-core/README.md
+#   pnpm run verify-translation-pairing --write plugins/anago-core/README.md
 /:
   en: e580ad3bad40eaab
   zh: 571a41b74c26107f
 /anago-harness-anago-core:
-  en: 40bb0bf95788c844
-  zh: 8b7c1899e56b6cbe
+  en: a8076e5494d62142
+  zh: 3506e9452025843a
 /anago-harness-anago-core/summary:
   en: 9a8d55d6e97f0563
   zh: 564a9d02a7cecb0d
@@ -21,8 +21,8 @@
   en: 93800ec4a7199159
   zh: ca4a38ee1f65f1e6
 /anago-harness-anago-core/further-exploration:
-  en: 7abcbdd0c22577d1
-  zh: 80132b5b6d2fe22d
+  en: f6d92977e96fe1e2
+  zh: ada5ce050f3e93af
 /anago-harness-anago-core/model-experience:
   en: f6c4d2609b5f4bb6
   zh: 694849df6967b6de

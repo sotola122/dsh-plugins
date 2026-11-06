@@ -1,6 +1,8 @@
 # dsh-plugins
 
-Anago fork plugins for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Every directory at the repository root is one publishable package under the `@anago-harness/` scope.
+English | [中文](README.zh.md)
+
+Anago fork plugins for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Every directory at the repository root is one private package under the `@anago-harness/` scope. The packages are not published to npm.
 
 ## Contents
 

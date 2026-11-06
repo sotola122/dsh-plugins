@@ -91,10 +91,10 @@ Token 覆盖使用 `:root:root`，因此无需依赖样式表顺序即可胜过 
 <a id="further-exploration"></a>
 ## 进一步探索
 
-- [ui-theme](../../client/ui-theme/README.zh.md) — 拥有本包所覆盖的 token 默认值、字体设置以及选择器所填充插槽的包。
+- [ui-theme](../../packages/client/ui-theme/README.zh.md) — 拥有本包所覆盖的 token 默认值、字体设置以及选择器所填充插槽的包。
 - [anago-web](../anago-web/README.zh.md) — 应当插入本行的浏览器 bundle。
 - [fork 分组](../README.zh.md) — 本分组的包地图。
-- [项目指南](../../../PROJECT_GUIDELINE.md) — 第 6.4 节规定了字体角色与终端检查。
+- [项目指南](../../PROJECT_GUIDELINE.md) — 第 6.4 节规定了字体角色与终端检查。
 
 -----
 

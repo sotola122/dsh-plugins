@@ -91,10 +91,10 @@ Font sources, glyph counts, advances, and file hashes live in `src/fonts/fonts.j
 <a id="further-exploration"></a>
 ## Further Exploration
 
-- [ui-theme](../../client/ui-theme/README.md) — the package that owns the token defaults this one overrides, the font settings, and the slot the picker fills.
+- [ui-theme](../../packages/client/ui-theme/README.md) — the package that owns the token defaults this one overrides, the font settings, and the slot the picker fills.
 - [anago-web](../anago-web/README.md) — the browser bundle that should insert this row.
 - [fork group](../README.md) — the package map for this group.
-- [Project guideline](../../../PROJECT_GUIDELINE.md) — section 6.4 specifies the font roles and the terminal check.
+- [Project guideline](../../PROJECT_GUIDELINE.md) — section 6.4 specifies the font roles and the terminal check.
 
 -----
 

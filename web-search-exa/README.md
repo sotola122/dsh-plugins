@@ -110,8 +110,8 @@ The carried class consumes `globalThis.fetch`, so the tests install a fake there
 ## Further Exploration
 
 - [fork group](../README.md) — the package map for this group.
-- [web service](../../web/web/README.md) — provider selection and the `WebError` taxonomy.
-- [tool-web](../../web/tool-web/README.md) — the model-facing `web_search` tool that renders these sources.
+- [web service](../../packages/web/web/README.md) — provider selection and the `WebError` taxonomy.
+- [tool-web](../../packages/web/tool-web/README.md) — the model-facing `web_search` tool that renders these sources.
 
 -----
 

@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.client.json",
+  "extends": "../../tsconfig.base.client.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib/types"
@@ -9,34 +9,34 @@
   ],
   "references": [
     {
-      "path": "../../../vendor/cordis"
+      "path": "../../vendor/cordis"
     },
     {
-      "path": "../../../vendor/schemastery"
+      "path": "../../vendor/schemastery"
     },
     {
-      "path": "../../client/locale/tsconfig.client.json"
+      "path": "../../packages/client/locale/tsconfig.client.json"
     },
     {
-      "path": "../../test-support/client-runtime"
+      "path": "../../packages/test-support/client-runtime"
     },
     {
-      "path": "../../client/ui-primitives"
+      "path": "../../packages/client/ui-primitives"
     },
     {
-      "path": "../../client/ui-renderer"
+      "path": "../../packages/client/ui-renderer"
     },
     {
-      "path": "../../client/ui-settings/tsconfig.client.json"
+      "path": "../../packages/client/ui-settings/tsconfig.client.json"
     },
     {
-      "path": "../../client/ui-slots"
+      "path": "../../packages/client/ui-slots"
     },
     {
-      "path": "../../client/ui-theme/tsconfig.client.json"
+      "path": "../../packages/client/ui-theme/tsconfig.client.json"
     },
     {
-      "path": "../../host/webserver"
+      "path": "../../packages/host/webserver"
     }
   ]
 }

@@ -60,8 +60,8 @@ guard.verdict('platform.deepseek.com')
 <a id="further-exploration"></a>
 ## 进一步探索
 
-- [启动包](../../boot/app-boot/README.zh.md) — `readProfilePatches` 导入本包。
-- [项目指南](../../../PROJECT_GUIDELINE.md) — denylist 与静态扫描。
+- [启动包](../../packages/boot/app-boot/README.zh.md) — `readProfilePatches` 导入本包。
+- [项目指南](../../PROJECT_GUIDELINE.md) — denylist 与静态扫描。
 
 -----
 

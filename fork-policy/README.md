@@ -60,8 +60,8 @@ The guard patches `net.Socket` connect and write, DNS lookups, and child `NODE_O
 <a id="further-exploration"></a>
 ## Further Exploration
 
-- [Boot package](../../boot/app-boot/README.md) — `readProfilePatches` imports this package.
-- [Project guideline](../../../PROJECT_GUIDELINE.md) — the denylist and the static scan.
+- [Boot package](../../packages/boot/app-boot/README.md) — `readProfilePatches` imports this package.
+- [Project guideline](../../PROJECT_GUIDELINE.md) — the denylist and the static scan.
 
 -----
 

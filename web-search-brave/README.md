@@ -112,8 +112,8 @@ The provider holds no mutable state. Every operation snapshots the settings, re-
 ## Further Exploration
 
 - [fork group](../README.md) — the package map for this group.
-- [web service](../../web/web/README.md) — the registry and provider-selection rules this plugin registers into.
-- [tool-web](../../web/tool-web/README.md) — the model-facing `web_search` tool that renders these sources.
+- [web service](../../packages/web/web/README.md) — the registry and provider-selection rules this plugin registers into.
+- [tool-web](../../packages/web/tool-web/README.md) — the model-facing `web_search` tool that renders these sources.
 
 -----
 

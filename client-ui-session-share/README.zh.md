@@ -55,9 +55,9 @@ Node 半是空的 `apply`，仅让本包持有一个 Loader 行，使客户端�
 ## 进一步探索
 
 - [anago-web](../anago-web/README.zh.md) — 插入该行的 bundle。
-- [session-controller](../../api/session-controller/README.zh.md) — Host 归属探测与浏览器会话服务。
-- [ui-conversation](../../client/ui-conversation/README.zh.md) — 本插件写入的输入区阻塞注册表。
-- [插件设计](../../../ANAGO_PLUGINS_DESIGN.md) — 包拆分与共享规则。
+- [session-controller](../../packages/api/session-controller/README.zh.md) — Host 归属探测与浏览器会话服务。
+- [ui-conversation](../../packages/client/ui-conversation/README.zh.md) — 本插件写入的输入区阻塞注册表。
+- [插件设计](../../ANAGO_PLUGINS_DESIGN.md) — 包拆分与共享规则。
 
 -----
 

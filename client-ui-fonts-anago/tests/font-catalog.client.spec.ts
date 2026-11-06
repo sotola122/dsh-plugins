@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { normalizeFontFamily } from '../../../client/ui-theme/src/theme-settings.ts'
+import { normalizeFontFamily } from '../../../packages/client/ui-theme/src/theme-settings.ts'
 import { FONT_CATALOG, FONT_CHOICES } from '../src/client/font-catalog.ts'
 
 const packageDir = resolve(import.meta.dirname, '..')

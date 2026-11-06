@@ -76,8 +76,8 @@ const detail = boundedProviderDetail(redactSecret(String(error), key), 200)
 
 - [web-search-brave](../web-search-brave/README.zh.md) — 读取直写密钥、credentials 服务与启动环境的 Brave 提供方。
 - [web-search-exa](../web-search-exa/README.zh.md) — 共享同一查找顺序的 Exa 提供方。
-- [credentials](../../credentials/credentials/README.zh.md) — 引用文法与 credentials 服务。
-- [launch environment](../../util/launch-environment/README.zh.md) — 第二个读取器使用的启动时冻结环境。
+- [credentials](../../packages/credentials/credentials/README.zh.md) — 引用文法与 credentials 服务。
+- [launch environment](../../packages/util/launch-environment/README.zh.md) — 第二个读取器使用的启动时冻结环境。
 
 -----
 

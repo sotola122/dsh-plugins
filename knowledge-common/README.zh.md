@@ -59,7 +59,7 @@ kind: "package-library"
 
 - [memory](../memory/README.zh.md) — 基于本库的全局与工作区存储。
 - [llm-wiki](../llm-wiki/README.zh.md) — 基于本包的项目与全局 wiki 存储。
-- [atomic write](../../util/atomic-write/README.zh.md) — 调用方注入的锁与原子替换接口。
+- [atomic write](../../packages/util/atomic-write/README.zh.md) — 调用方注入的锁与原子替换接口。
 
 -----
 

@@ -53,7 +53,7 @@ anago 配置的主机能力层：记忆、LLM wiki、日语响应指令，以及
 ## 进一步探索
 
 - [fork 分组](../README.zh.md) — 本分组的包地图。
-- [捆绑插件设计](../../../ANAGO_PLUGINS_DESIGN.md) — 包划分与设置卡片。
+- [捆绑插件设计](../../ANAGO_PLUGINS_DESIGN.md) — 包划分与设置卡片。
 
 -----
 

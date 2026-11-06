@@ -110,8 +110,8 @@ kind: "package-reference"
 ## 进一步探索
 
 - [fork 分组](../README.zh.md) — 本分组的包地图。
-- [web 服务](../../web/web/README.zh.md) — 提供方选择与 `WebError` 分类。
-- [tool-web](../../web/tool-web/README.zh.md) — 渲染这些 source 的模型可见 `web_search` 工具。
+- [web 服务](../../packages/web/web/README.zh.md) — 提供方选择与 `WebError` 分类。
+- [tool-web](../../packages/web/tool-web/README.zh.md) — 渲染这些 source 的模型可见 `web_search` 工具。
 
 -----
 

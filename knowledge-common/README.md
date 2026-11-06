@@ -59,7 +59,7 @@ Text normalization removes format characters, applies NFKC, compresses whitespac
 
 - [memory](../memory/README.md) — the global and workspace stores built on this library.
 - [llm-wiki](../llm-wiki/README.md) — the project and global wiki stores built on this library.
-- [atomic write](../../util/atomic-write/README.md) — the lock and atomic replacement seam callers inject.
+- [atomic write](../../packages/util/atomic-write/README.md) — the lock and atomic replacement seam callers inject.
 
 -----
 

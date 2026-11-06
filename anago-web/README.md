@@ -50,7 +50,7 @@ The profile composer reads the bundle's patch and applies it after the upstream 
 ## Further Exploration
 
 - [fork group](../README.md) — the package map for this group.
-- [Design of the bundled plugins](../../../ANAGO_PLUGINS_DESIGN.md) — package split and settings cards.
+- [Design of the bundled plugins](../../ANAGO_PLUGINS_DESIGN.md) — package split and settings cards.
 
 -----
 

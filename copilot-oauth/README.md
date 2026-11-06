@@ -62,8 +62,8 @@ The Copilot grant asks one text question, the GitHub Enterprise URL or domain, t
 ## Further Exploration
 
 - [fork group](../README.md) — the package map for this group.
-- [`llm-pi-ai`](../../llm/llm-pi-ai/README.md) — the adapter that registers the GitHub Copilot flow and reads the record at request time.
-- [authorization service](../../credentials/authorization/README.md) — the flow registry and the `begin`/`cancel` contract.
+- [`llm-pi-ai`](../../packages/llm/llm-pi-ai/README.md) — the adapter that registers the GitHub Copilot flow and reads the record at request time.
+- [authorization service](../../packages/credentials/authorization/README.md) — the flow registry and the `begin`/`cancel` contract.
 
 -----
 

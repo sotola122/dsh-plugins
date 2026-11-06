@@ -10,7 +10,7 @@ import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve, sep } from 'node:path'
 import type { TsdownPlugin, UserConfig } from 'tsdown'
-import { clientBundle } from '../../client/tsdown.client.ts'
+import { clientBundle } from '../../packages/client/tsdown.client.ts'
 
 /** Path segment separating tsc's emitted tree from the sources it compiled. */
 const TYPES_MARKER = `${sep}lib${sep}types${sep}`

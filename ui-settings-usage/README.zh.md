@@ -88,8 +88,8 @@ Host 部分是 `ProviderUsageService`，一个暴露 `providerUsage/report` 的 
 
 - [fork 组](../README.zh.md) — 本组的包地图。
 - [`copilot-oauth`](../copilot-oauth/README.zh.md) — 产生本包所读取授权的登录命令。
-- [`llm-pi-ai`](../../llm/llm-pi-ai/README.zh.md) — 拥有并刷新该记录的适配器。
-- [Typert 协议](../../typert/protocol/README.zh.md) — Host 方法如何成为该部分调用的 Remote。
+- [`llm-pi-ai`](../../packages/llm/llm-pi-ai/README.zh.md) — 拥有并刷新该记录的适配器。
+- [Typert 协议](../../packages/typert/protocol/README.zh.md) — Host 方法如何成为该部分调用的 Remote。
 
 -----
 
