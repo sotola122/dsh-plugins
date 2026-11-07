@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 import type { UsageReport } from '../src/types.ts'
 import { UsageController } from '../src/client/usage-controller.ts'
 
-const REPORT: UsageReport = { providers: [{ provider: 'xai', status: 'unsupported', reason: 'no-usage-endpoint' }] }
+const REPORT: UsageReport = { providers: [{ provider: 'xai', status: 'unsupported', reason: 'disabled' }], readAt: 1_000 }
 const ok = (value: UsageReport): RemoteResult<UsageReport> => ({ ok: true, value })
 
 function bench(read: (signal: AbortSignal) => Promise<RemoteResult<UsageReport>>) {
@@ -28,7 +28,22 @@ describe('UsageController', () => {
     const { controller, warn } = bench(() => Promise.resolve(ok(REPORT)))
     await controller.refresh()
     expect(controller.rows.getSnapshot()).toEqual(REPORT.providers)
+    expect(controller.readAt.getSnapshot()).toBe(1_000)
     expect(warn).not.toHaveBeenCalled()
+  })
+
+  it('forgets the previous read time while reading again', async () => {
+    const second = Promise.withResolvers<RemoteResult<UsageReport>>()
+    const read = vi.fn<() => Promise<RemoteResult<UsageReport>>>()
+      .mockResolvedValueOnce(ok(REPORT))
+      .mockReturnValueOnce(second.promise)
+    const { controller } = bench(read)
+    await controller.refresh()
+    const again = controller.refresh()
+    expect(controller.readAt.getSnapshot()).toBeUndefined()
+    second.resolve(ok({ ...REPORT, readAt: 2_000 }))
+    await again
+    expect(controller.readAt.getSnapshot()).toBe(2_000)
   })
 
   it.each<[string, () => Promise<RemoteResult<UsageReport>>]>([
@@ -43,6 +58,7 @@ describe('UsageController', () => {
     expect(JSON.stringify(rows)).toContain('host-unavailable')
     expect(JSON.stringify([rows, warn.mock.calls])).not.toContain('private detail')
     expect(warn).toHaveBeenCalledOnce()
+    expect(controller.readAt.getSnapshot()).toBeUndefined()
   })
 
   it('shows loading again on refresh and lets a newer read supersede an older one', async () => {
@@ -56,7 +72,7 @@ describe('UsageController', () => {
     const older = controller.refresh()
     await controller.refresh()
     expect(signals[0]?.aborted).toBe(true)
-    first.resolve(ok({ providers: [{ provider: 'xai', status: 'failed', reason: 'network' }] }))
+    first.resolve(ok({ providers: [{ provider: 'xai', status: 'failed', reason: 'network' }], readAt: 2_000 }))
     await older
     expect(controller.rows.getSnapshot()).toEqual(REPORT.providers)
   })

@@ -3,35 +3,35 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write plugins/ui-settings-usage/README.md
 /:
-  en: bdd4d55393d0cea2
-  zh: ff9a49c5556502f4
+  en: 550c60c69bc730fa
+  zh: dc3c810e107d8ab6
 /anago-harness-ui-settings-usage:
   en: ad2c140b0546626f
   zh: 603446ed98fc6f86
 /anago-harness-ui-settings-usage/summary:
-  en: 4a9f83e74244f84d
-  zh: 16b98fbfd090f9a8
+  en: 4be176025cb74742
+  zh: dffb8769aa4713a4
 /anago-harness-ui-settings-usage/table-of-contents:
   en: d152484eb41ac6b4
   zh: c9246108bd07f3aa
 /anago-harness-ui-settings-usage/use-this-package:
-  en: 1c2ff64684feaf3a
-  zh: cd0a711d1265a114
+  en: 0983d8d25723a862
+  zh: 9cbe8f1036906425
 /anago-harness-ui-settings-usage/understand-the-implementation:
-  en: cb1eebc3a82d6d94
-  zh: 664ad45440778a7f
+  en: 1b4f7a6bb9c4c604
+  zh: 62f52c70f6764b22
 /anago-harness-ui-settings-usage/further-exploration:
-  en: bf6a5ce5915d7766
-  zh: 26928227b144885d
+  en: 1b4b9cf8b9b2181f
+  zh: dbd5b672783a47ca
 /anago-harness-ui-settings-usage/model-experience:
-  en: 291ef215f2fc7188
-  zh: f71739c07e5cada4
+  en: 9d16efab43ed14a4
+  zh: 74372f15f2a27210
 /anago-harness-ui-settings-usage/model-experience/kv-cache-effect:
   en: 9c6dea8080c6ce02
   zh: d8ae7dbf00b3cc1f
 /anago-harness-ui-settings-usage/known-limitations-and-deferred-work:
-  en: fd350e02e64daea7
-  zh: f12367ed504e9e36
+  en: e3173fc01b32cb21
+  zh: b7c274cc307997f1
 /anago-harness-ui-settings-usage/known-limitations-and-deferred-work/dev-note:
-  en: 26943827a180a3fc
-  zh: 53671fc0a9d9a8a5
+  en: c021d13129e98a19
+  zh: 45fc8967c421b8c8

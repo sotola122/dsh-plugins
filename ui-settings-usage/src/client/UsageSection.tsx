@@ -20,6 +20,8 @@ export interface UsageSectionInjected {
   hooks: {
     /** The provider rows, bound by the renderer as `useUsageRows`. */
     usageRows: SnapshotStore<readonly UsageRow[]>
+    /** When the shown rows were read, bound by the renderer as `useUsageReadAt`. */
+    usageReadAt: SnapshotStore<number | undefined>
   }
   /** Start a read; called on open and from the refresh button. */
   refresh: () => void
@@ -57,6 +59,7 @@ const STATUS_TONES: Record<UsageRow['status'], TagTone> = {
   loading: 'neutral',
   ok: 'success',
   unsupported: 'outline',
+  'sign-in-required': 'warning',
   failed: 'danger',
 }
 
@@ -64,9 +67,52 @@ const METER_NAMES: Readonly<Record<string, UsageLocaleKey>> = {
   premium_interactions: 'meter.premium_interactions',
   chat: 'meter.chat',
   completions: 'meter.completions',
+  spend_limit: 'meter.spend_limit',
+  primary_window: 'meter.primary_window',
+  secondary_window: 'meter.secondary_window',
+  code_review: 'meter.code_review',
+  credits: 'meter.credits',
+  rolling: 'meter.rolling',
+  weekly: 'meter.weekly',
+  monthly: 'meter.monthly',
+  included_credits: 'meter.included_credits',
+  on_demand: 'meter.on_demand',
+  prepaid_credits: 'meter.prepaid_credits',
 }
 
-const NUMBER_FORMAT = new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 })
+const NUMBER_FORMAT = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+
+/** Separates the facts about one quota on its line. */
+const DETAIL_SEPARATOR = ' · '
+
+/**
+ * The usage rate and allowance facts one quota reported, each as a phrase.
+ * @param meter - the quota.
+ * @param t - the section's locale reader.
+ * @returns the phrases; only numbers the provider reported produce one.
+ */
+function meterDetails(meter: UsageMeter, t: Translate): string[] {
+  const money = (value: number): string => {
+    const formatted = NUMBER_FORMAT.format(value)
+    return meter.unit === undefined ? formatted : `${formatted} ${meter.unit}`
+  }
+  const { used, remaining, entitlement, percentUsed, percentRemaining, resetAt } = meter
+  const details: string[] = []
+  if (used !== undefined) {
+    details.push(entitlement === undefined
+      ? t('detail.used', { used: money(used) })
+      : t('detail.usedOf', { used: money(used), entitlement: money(entitlement) }))
+  }
+  if (remaining !== undefined) {
+    details.push(entitlement === undefined || used !== undefined
+      ? t('detail.remaining', { remaining: money(remaining) })
+      : t('detail.remainingOf', { remaining: money(remaining), entitlement: money(entitlement) }))
+  }
+  const percent = percentUsed ?? (percentRemaining === undefined ? undefined : 100 - percentRemaining)
+  if (percent !== undefined) details.push(t('detail.percentUsed', { percent: Math.round(percent) }))
+  if (details.length > 0 && resetAt !== undefined) details.push(t('detail.resets', { time: new Date(resetAt).toLocaleString() }))
+  return details
+}
 
 /**
  * One quota as text, using only the numbers the provider reported.
@@ -78,13 +124,8 @@ function meterLine(meter: UsageMeter, t: Translate): string | undefined {
   const known = METER_NAMES[meter.id]
   const name = known === undefined ? meter.id : t(known)
   if (meter.unlimited) return t('detail.unlimited', { name })
-  const { remaining, entitlement, percentRemaining } = meter
-  if (remaining !== undefined && entitlement !== undefined) {
-    return t('detail.remainingOf', { name, remaining: NUMBER_FORMAT.format(remaining), entitlement: NUMBER_FORMAT.format(entitlement) })
-  }
-  if (remaining !== undefined) return t('detail.remaining', { name, remaining: NUMBER_FORMAT.format(remaining) })
-  if (percentRemaining !== undefined) return t('detail.percent', { name, percent: Math.round(percentRemaining) })
-  return undefined
+  const details = meterDetails(meter, t)
+  return details.length === 0 ? undefined : t('detail.meter', { name, details: details.join(DETAIL_SEPARATOR) })
 }
 
 /**
@@ -104,9 +145,9 @@ function rowDetails(row: UsageRow, t: Translate): string[] {
         ...row.resetAt === undefined ? [] : [t('detail.resetAt', { time: new Date(row.resetAt).toLocaleString() })],
       ]
     case 'unsupported':
-      if (row.reason === 'disabled') return [t('unsupported.disabled')]
-      // `github-copilot` has an endpoint, so it can only reach this row through `disabled`.
-      return [t(`unsupported.${row.provider as Exclude<UsageRow['provider'], 'github-copilot'>}`)]
+      return [t(`unsupported.${row.reason}`)]
+    case 'sign-in-required':
+      return [t(`signIn.${row.reason}`), t(`signIn.action.${row.provider}`)]
     case 'failed':
       return [row.reason === 'http-error'
         ? t('failure.http-error', { status: row.httpStatus })
@@ -125,12 +166,14 @@ function assertNever(_value: never): never {
 
 /**
  * Render every provider's status and whatever usage it reported. Opening the
- * section starts the read and closing it abandons the read.
+ * section starts the read and closing it abandons the read. A sign-in row says
+ * what to do; the section never starts a sign-in.
  * @param props - composed Settings slot props.
  * @returns the section.
  */
-export function UsageSection({ t, useUsageRows, refresh, cancel }: UsageSectionProps) {
+export function UsageSection({ t, useUsageRows, useUsageReadAt, refresh, cancel }: UsageSectionProps) {
   const rows = useUsageRows(value => value)
+  const readAt = useUsageReadAt(value => value)
   const loading = rows.some(row => row.status === 'loading')
   useEffect(() => {
     refresh()
@@ -143,6 +186,7 @@ export function UsageSection({ t, useUsageRows, refresh, cancel }: UsageSectionP
         <Button variant="outline" size="sm" disabled={loading} onClick={refresh}>{t('refresh')}</Button>
       </div>
       <p style={INTRO_STYLE}>{t('intro')}</p>
+      {readAt === undefined ? null : <p style={INTRO_STYLE}>{t('detail.updatedAt', { time: new Date(readAt).toLocaleString() })}</p>}
       <ul style={LIST_STYLE} aria-busy={loading}>
         {rows.map((row, index) => (
           <li key={row.provider} style={index === 0 ? ROW_STYLE : DIVIDED_ROW_STYLE}>

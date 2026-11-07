@@ -13,7 +13,7 @@ Anago fork plugins for [DeepSeek Harness](https://github.com/deepseek-ai/deepsee
 | `client-ui-fonts-anago` | Bundled UDEV Gothic, Noto Sans JP, and Intel One Mono faces plus a picker that applies them to the interface text, code, and terminal |
 | `client-ui-session-share` | Session sharing between browser windows |
 | `client-ui-settings-web-search` | Settings card for the fork's search providers |
-| `ui-settings-usage` | Settings **Usage** section: GitHub Copilot quota, and an explained unsupported state for the other providers |
+| `ui-settings-usage` | Settings **Usage** section: GitHub Copilot, OpenAI Codex, xAI, and OpenCode Go usage |
 | `copilot-oauth` / `xai-oauth` / `openai-codex-oauth` | Sign-in flows for the GitHub Copilot, xAI, and OpenAI Codex providers |
 | `memory` | The `memory` tool and its storage |
 | `knowledge-common` | Shared knowledge storage used by `memory` and `llm-wiki` |

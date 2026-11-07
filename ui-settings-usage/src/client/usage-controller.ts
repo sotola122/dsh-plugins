@@ -23,6 +23,8 @@ export class UsageController {
   readonly rows: SnapshotStore<readonly UsageRow[]> = createSnapshotStore<readonly UsageRow[]>(
     PROVIDERS.map(provider => ({ provider, status: 'loading' })),
   )
+  /** Epoch milliseconds when the shown rows were read; undefined while none are shown. */
+  readonly readAt: SnapshotStore<number | undefined> = createSnapshotStore<number | undefined>(undefined)
   private active: AbortController | undefined
 
   /**
@@ -43,17 +45,19 @@ export class UsageController {
     const lifetime = new AbortController()
     this.active = lifetime
     this.rows.set(PROVIDERS.map(provider => ({ provider, status: 'loading' })))
-    let providers: readonly UsageRow[] | undefined
+    this.readAt.set(undefined)
+    let report: UsageReport | undefined
     try {
       const result = await this.read(lifetime.signal)
-      if (result.ok) providers = result.value.providers
+      if (result.ok) report = result.value
     } catch (_error) {
       // A cancelled or dropped call settles the same way below; its text is not shown.
-      providers = undefined
+      report = undefined
     }
     if (lifetime.signal.aborted) return
-    if (providers === undefined) this.warn('ui-settings-usage: the Host usage read failed')
-    this.rows.set(providers ?? PROVIDERS.map(provider => ({ provider, status: 'failed', reason: 'host-unavailable' })))
+    if (report === undefined) this.warn('ui-settings-usage: the Host usage read failed')
+    this.rows.set(report?.providers ?? PROVIDERS.map(provider => ({ provider, status: 'failed', reason: 'host-unavailable' })))
+    this.readAt.set(report?.readAt)
   }
 
   /** Abandon the read in flight; a late answer publishes nothing. */

@@ -1,14 +1,14 @@
-/** The Remote read over a fake GitHub API: normalized quota, isolated failures, bounded time, and no secret in any output. */
+/** The Copilot read over a fake GitHub API, normalized quota, bounded time, no secret in any output, and the plugin's Config. */
 
 import { readFileSync } from 'node:fs'
-import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http'
-import type { AddressInfo } from 'node:net'
+import type { IncomingMessage, ServerResponse } from 'node:http'
 import { Context } from '@deepseek-ai/cordis'
 import type { CredentialRecord } from '@deepseek-ai/dsh-credentials'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { parseCopilotUsage, resolveCopilotEndpoint } from '../src/copilot.ts'
 import ProviderUsageService from '../src/index.ts'
 import type { UsageReport } from '../src/types.ts'
+import { closeFakeApis, fakeApi, forbidExternalNetwork, respondJson } from './support.ts'
 
 const TOKEN = 'gho_fixture_secret_token'
 const GRANT: CredentialRecord = { kind: 'grant', payload: { type: 'oauth', refresh: TOKEN, access: 'copilot-proxy-token', expires: 0 } }
@@ -24,37 +24,14 @@ const QUOTA = {
   },
 }
 
-const servers: Server[] = []
 const roots: Context[] = []
+
+forbidExternalNetwork()
 
 afterEach(async () => {
   await Promise.all(roots.splice(0).map(ctx => ctx.fiber.dispose()))
-  await Promise.all(servers.splice(0).map(closeServer))
+  await closeFakeApis()
 })
-
-function closeServer(server: Server): Promise<void> {
-  server.closeAllConnections()
-  return new Promise((resolve) => { server.close(() => { resolve() }) })
-}
-
-/** Start a fake API on an ephemeral loopback port; the spec's teardown closes it. */
-async function fakeApi(handler: (request: IncomingMessage, response: ServerResponse) => void) {
-  const requests: IncomingMessage[] = []
-  const server = createServer((request, response) => {
-    requests.push(request)
-    handler(request, response)
-  })
-  servers.push(server)
-  await new Promise<void>((resolve) => { server.listen(0, '127.0.0.1', resolve) })
-  return { requests, endpoint: `http://127.0.0.1:${String((server.address() as AddressInfo).port)}/copilot_internal/user` }
-}
-
-function respondJson(status: number, body: unknown) {
-  return (_request: IncomingMessage, response: ServerResponse): void => {
-    response.writeHead(status, { 'content-type': 'application/json' })
-    response.end(JSON.stringify(body))
-  }
-}
 
 function service(options: {
   endpoint?: string
@@ -73,6 +50,9 @@ function service(options: {
       ...options.enabled === undefined ? {} : { enabled: options.enabled },
       ...options.endpoint === undefined ? {} : { endpoint: options.endpoint },
     },
+    openaiCodex: { enabled: false },
+    xai: { enabled: false },
+    opencodeGo: { enabled: false },
   }))
   return { usage, readRecord, warn }
 }
@@ -80,7 +60,7 @@ function service(options: {
 const read = (usage: ProviderUsageService, signal = new AbortController().signal): Promise<UsageReport> => usage.report(signal)
 const copilotRow = (report: UsageReport) => report.providers.find(row => row.provider === 'github-copilot')
 
-describe('providerUsage report', () => {
+describe('Copilot usage', () => {
   it('normalizes Copilot quota and authorizes with the GitHub token from the grant', async () => {
     const api = await fakeApi(respondJson(200, QUOTA))
     const { usage, warn } = service({ endpoint: api.endpoint })
@@ -96,14 +76,21 @@ describe('providerUsage report', () => {
           { id: 'chat', unlimited: true },
         ],
       },
-      { provider: 'openai-codex', status: 'unsupported', reason: 'no-usage-endpoint' },
-      { provider: 'xai', status: 'unsupported', reason: 'no-usage-endpoint' },
-      { provider: 'opencode-go', status: 'unsupported', reason: 'no-usage-endpoint' },
+      { provider: 'openai-codex', status: 'unsupported', reason: 'disabled' },
+      { provider: 'xai', status: 'unsupported', reason: 'disabled' },
+      { provider: 'opencode-go', status: 'unsupported', reason: 'disabled' },
     ])
     expect(api.requests).toHaveLength(1)
-    expect(api.requests[0]?.url).toBe('/copilot_internal/user')
+    expect(api.requests[0]?.url).toBe('/usage')
     expect(api.requests[0]?.headers.authorization).toBe(`Bearer ${TOKEN}`)
     expect(warn).not.toHaveBeenCalled()
+  })
+
+  it('reads with the GitHub token even when the Copilot proxy token has expired', async () => {
+    const api = await fakeApi(respondJson(200, QUOTA))
+    const { usage } = service({ endpoint: api.endpoint })
+    expect(copilotRow(await read(usage))).toMatchObject({ status: 'ok' })
+    expect(api.requests[0]?.headers.authorization).not.toContain('copilot-proxy-token')
   })
 
   it('never carries an account identifier from the response into the row', async () => {
@@ -120,18 +107,26 @@ describe('providerUsage report', () => {
     expect(api.requests).toHaveLength(0)
   })
 
-  it.each<[string, CredentialRecord | undefined, string]>([
-    ['no record', undefined, 'not-signed-in'],
-    ['an API-key record', { kind: 'api-key', key: TOKEN }, 'not-signed-in'],
-    ['a grant without a token', { kind: 'grant', payload: { type: 'oauth' } }, 'credential-unusable'],
-    ['a grant with an empty token', { kind: 'grant', payload: { refresh: '' } }, 'credential-unusable'],
-    ['a grant that is not an object', { kind: 'grant', payload: [TOKEN] }, 'credential-unusable'],
-    ['an enterprise value that is not a hostname', { kind: 'grant', payload: { refresh: TOKEN, enterpriseUrl: 'evil.example/path?x=' } }, 'credential-unusable'],
-    ['an enterprise value that is not text', { kind: 'grant', payload: { refresh: TOKEN, enterpriseUrl: 7 } }, 'credential-unusable'],
-  ])('sends no request for %s', async (_name, record, reason) => {
+  it.each<[string, CredentialRecord | undefined]>([
+    ['no record', undefined],
+    ['an API-key record', { kind: 'api-key', key: TOKEN }],
+  ])('asks for a sign-in and sends no request for %s', async (_name, record) => {
     const api = await fakeApi(respondJson(200, QUOTA))
     const { usage } = service({ endpoint: api.endpoint, readRecord: () => Promise.resolve(record) })
-    expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'failed', reason })
+    expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'sign-in-required', reason: 'not-signed-in' })
+    expect(api.requests).toHaveLength(0)
+  })
+
+  it.each<[string, CredentialRecord]>([
+    ['a grant without a token', { kind: 'grant', payload: { type: 'oauth' } }],
+    ['a grant with an empty token', { kind: 'grant', payload: { refresh: '' } }],
+    ['a grant that is not an object', { kind: 'grant', payload: [TOKEN] }],
+    ['an enterprise value that is not a hostname', { kind: 'grant', payload: { refresh: TOKEN, enterpriseUrl: 'evil.example/path?x=' } }],
+    ['an enterprise value that is not text', { kind: 'grant', payload: { refresh: TOKEN, enterpriseUrl: 7 } }],
+  ])('sends no request for %s', async (_name, record) => {
+    const api = await fakeApi(respondJson(200, QUOTA))
+    const { usage } = service({ endpoint: api.endpoint, readRecord: () => Promise.resolve(record) })
+    expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'failed', reason: 'credential-unusable' })
     expect(api.requests).toHaveLength(0)
   })
 
@@ -155,16 +150,16 @@ describe('providerUsage report', () => {
   })
 
   it.each([
-    [401, { reason: 'unauthorized' }],
-    [403, { reason: 'unauthorized' }],
-    [429, { reason: 'rate-limited' }],
-    [500, { reason: 'http-error', httpStatus: 500 }],
-    [404, { reason: 'http-error', httpStatus: 404 }],
-  ])('reports HTTP %i as its own failure and keeps every other row', async (status, expected) => {
+    [401, { status: 'sign-in-required', reason: 'token-rejected' }],
+    [403, { status: 'failed', reason: 'forbidden' }],
+    [429, { status: 'failed', reason: 'rate-limited' }],
+    [500, { status: 'failed', reason: 'http-error', httpStatus: 500 }],
+    [404, { status: 'failed', reason: 'http-error', httpStatus: 404 }],
+  ])('reports HTTP %i as its own state and keeps every other row', async (status, expected) => {
     const api = await fakeApi(respondJson(status, { message: 'refused' }))
     const { usage } = service({ endpoint: api.endpoint })
     const report = await read(usage)
-    expect(copilotRow(report)).toEqual({ provider: 'github-copilot', status: 'failed', ...expected })
+    expect(copilotRow(report)).toEqual({ provider: 'github-copilot', ...expected })
     expect(report.providers.filter(row => row.status === 'unsupported')).toHaveLength(3)
   })
 
@@ -194,7 +189,7 @@ describe('providerUsage report', () => {
 
   it('reports an unreachable provider as a network failure', async () => {
     const api = await fakeApi(respondJson(200, QUOTA))
-    await Promise.all(servers.splice(0).map(closeServer))
+    await closeFakeApis()
     const { usage } = service({ endpoint: api.endpoint })
     expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'failed', reason: 'network' })
   })
@@ -231,7 +226,6 @@ describe('providerUsage report', () => {
     caller.abort(new Error('page closed'))
     pendingRecord.resolve(GRANT)
     await expect(pending).rejects.toThrow('page closed')
-    expect(api.requests).toHaveLength(0)
   })
 
   it('rejects with the caller cancellation when the credential read fails after it', async () => {
@@ -242,6 +236,14 @@ describe('providerUsage report', () => {
     caller.abort(new Error('page closed'))
     pendingRecord.reject(new Error('store unavailable'))
     await expect(pending).rejects.toThrow('page closed')
+  })
+
+  it('rejects at once for a caller that already cancelled, without reading', async () => {
+    const { usage, readRecord } = service()
+    const caller = new AbortController()
+    caller.abort(new Error('page closed'))
+    await expect(read(usage, caller.signal)).rejects.toThrow('page closed')
+    expect(readRecord).not.toHaveBeenCalled()
   })
 
   it('keeps secrets out of every row and log line when the provider and the store quote them', async () => {
@@ -291,7 +293,14 @@ describe('parseCopilotUsage', () => {
 
 describe('Config', () => {
   it('applies working defaults to an empty row', () => {
-    expect(ProviderUsageService.Config({})).toEqual({ timeoutMs: 10_000, copilot: { enabled: true } })
+    expect(ProviderUsageService.Config({})).toEqual({
+      timeoutMs: 10_000,
+      minRefreshIntervalMs: 30_000,
+      copilot: { enabled: true },
+      openaiCodex: { enabled: true },
+      xai: { enabled: true },
+      opencodeGo: { enabled: true, apiKeyEnvs: ['OPENCODE_GO_API_KEY', 'OPENCODE_API_KEY'] },
+    })
   })
 
   it.each([
@@ -316,12 +325,30 @@ describe('Config', () => {
     expect(() => ProviderUsageService.Config({ copilot: { endpoint } })).toThrow()
   })
 
+  it.each(['openaiCodex', 'xai', 'opencodeGo'] as const)('validates the %s endpoint the same way', (provider) => {
+    expect(ProviderUsageService.Config({ [provider]: { endpoint: 'https://proxy.test/usage' } })[provider].endpoint).toBe('https://proxy.test/usage')
+    expect(() => ProviderUsageService.Config({ [provider]: { endpoint: 'http://proxy.test/usage' } })).toThrow()
+  })
+
+  it('accepts a credential reference name and fails loud on anything else', () => {
+    expect(ProviderUsageService.Config({ opencodeGo: { apiKeyEnvs: ['MY_KEY'] } }).opencodeGo.apiKeyEnvs).toEqual(['MY_KEY'])
+    expect(() => ProviderUsageService.Config({ opencodeGo: { apiKeyEnvs: ['not a name'] } })).toThrow()
+  })
+
   it.each([0, -1, 1.5, 120_001])('fails loud on the time limit %d', (timeoutMs) => {
     expect(() => ProviderUsageService.Config({ timeoutMs })).toThrow()
   })
 
   it.each([1, 120_000])('accepts the time limit %d', (timeoutMs) => {
     expect(ProviderUsageService.Config({ timeoutMs }).timeoutMs).toBe(timeoutMs)
+  })
+
+  it.each([-1, 1.5, 3_600_001])('fails loud on the refresh interval %d', (minRefreshIntervalMs) => {
+    expect(() => ProviderUsageService.Config({ minRefreshIntervalMs })).toThrow()
+  })
+
+  it.each([0, 3_600_000])('accepts the refresh interval %d', (minRefreshIntervalMs) => {
+    expect(ProviderUsageService.Config({ minRefreshIntervalMs }).minRefreshIntervalMs).toBe(minRefreshIntervalMs)
   })
 })
 

@@ -24,7 +24,7 @@ async function fixture() {
   new TestRemote()
   const report = vi.fn((_signal: AbortSignal) => Promise.resolve({
     ok: true,
-    value: { providers: [{ provider: 'xai', status: 'unsupported', reason: 'no-usage-endpoint' }] },
+    value: { providers: [{ provider: 'xai', status: 'unsupported', reason: 'disabled' }], readAt: 1_000 },
   }))
   ctx.provide('remote.providerUsage', { report } as never)
   const locale = new LocaleRuntime(ctx)
@@ -59,8 +59,9 @@ describe('mountUsage', () => {
       face.refresh()
       expect(b.report).toHaveBeenCalledOnce()
       await vi.waitFor(() => {
-        expect(face.hooks.usageRows.getSnapshot()).toEqual([{ provider: 'xai', status: 'unsupported', reason: 'no-usage-endpoint' }])
+        expect(face.hooks.usageRows.getSnapshot()).toEqual([{ provider: 'xai', status: 'unsupported', reason: 'disabled' }])
       })
+      expect(face.hooks.usageReadAt.getSnapshot()).toBe(1_000)
       await dispose()
     } finally { await b.ctx.fiber.dispose() }
   })

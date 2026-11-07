@@ -1,6 +1,6 @@
 {
   "name": "@anago-harness/ui-settings-usage",
-  "description": "Settings page section that reports each LLM provider's usage: GitHub Copilot quota, and an explained unsupported state for the others.",
+  "description": "Settings page section that reports GitHub Copilot, OpenAI Codex, xAI, and OpenCode Go usage, renewing an expired sign-in through its owning flow.",
   "version": "0.2.2-rc.1",
   "private": true,
   "type": "module",
@@ -68,6 +68,7 @@
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/dsh-api-remotes": "workspace:*",
+    "@deepseek-ai/dsh-authorization": "workspace:*",
     "@deepseek-ai/dsh-client-locale": "workspace:*",
     "@deepseek-ai/dsh-client-store": "workspace:*",
     "@deepseek-ai/dsh-client-test-runtime": "workspace:*",

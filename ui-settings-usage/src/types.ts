@@ -10,39 +10,54 @@ export type UsageProviderId = 'github-copilot' | 'openai-codex' | 'xai' | 'openc
 
 /** One quota the provider reported; a number the provider omitted stays absent. */
 export interface UsageMeter {
-  /** Provider-defined quota name, such as `premium_interactions`. */
+  /** Quota name: the provider's own for Copilot, a fixed name for the other providers. */
   readonly id: string
   /** Whether the provider reports this quota as unlimited. */
   readonly unlimited: boolean
   /** Total allowance for the period. */
   readonly entitlement?: number
+  /** Allowance consumed in the period. */
+  readonly used?: number
   /** Allowance left in the period. */
   readonly remaining?: number
+  /** Share of the allowance consumed, from 0 to 100. */
+  readonly percentUsed?: number
   /** Share of the allowance left, from 0 to 100. */
   readonly percentRemaining?: number
+  /** Unit of `entitlement`, `used`, and `remaining`; absent when the provider names none. */
+  readonly unit?: string
+  /** Epoch milliseconds when this quota resets. */
+  readonly resetAt?: number
 }
 
 /** Why a provider row carries no usage although reading it was attempted; another HTTP status has its own row. */
 export type UsageFailureReason =
-  /** No OAuth grant is stored for the provider. */
-  | 'not-signed-in'
   /** The stored credential could not be read or lacks a usable token. */
   | 'credential-unusable'
-  /** The provider answered 401 or 403. */
-  | 'unauthorized'
+  /** The provider answered 403. */
+  | 'forbidden'
   /** The provider answered 429. */
   | 'rate-limited'
-  /** The configured time limit elapsed before the response finished. */
+  /** The configured time limit elapsed before the read finished. */
   | 'timeout'
   /** The request failed without an HTTP response, including a refused redirect. */
   | 'network'
   /** The response was not JSON or carried no recognized usage field. */
   | 'invalid-response'
 
+/** Why a provider row needs a human to sign in again; the section never starts a sign-in itself. */
+export type UsageSignInReason =
+  /** No credential is stored for the provider. */
+  | 'not-signed-in'
+  /** The token expired and this composition has no renewal path for it. */
+  | 'token-expired'
+  /** The token expired and its renewal failed. */
+  | 'renewal-failed'
+  /** The provider answered 401. */
+  | 'token-rejected'
+
 /** Why a provider row is not read at all. */
 export type UsageUnsupportedReason =
-  /** The provider's adapter defines no usage endpoint to read. */
-  | 'no-usage-endpoint'
   /** The profile turned reading this provider off. */
   | 'disabled'
 
@@ -53,7 +68,7 @@ export type ProviderUsage =
     readonly status: 'ok'
     /** Subscription plan name the provider reports. */
     readonly plan?: string
-    /** Epoch milliseconds when the quota period resets. */
+    /** Epoch milliseconds when every quota in the row resets, when the provider reports one date for all of them. */
     readonly resetAt?: number
     /** Quotas the provider reported, possibly none when only a plan is known. */
     readonly meters: readonly UsageMeter[]
@@ -62,6 +77,11 @@ export type ProviderUsage =
     readonly provider: UsageProviderId
     readonly status: 'unsupported'
     readonly reason: UsageUnsupportedReason
+  }
+  | {
+    readonly provider: UsageProviderId
+    readonly status: 'sign-in-required'
+    readonly reason: UsageSignInReason
   }
   | {
     readonly provider: UsageProviderId
@@ -80,4 +100,6 @@ export type ProviderUsage =
 export interface UsageReport {
   /** One row per {@link UsageProviderId}. */
   readonly providers: readonly ProviderUsage[]
+  /** Epoch milliseconds when these rows were read; older than the call when the Host reused a recent read. */
+  readonly readAt: number
 }

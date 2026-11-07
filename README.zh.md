@@ -13,7 +13,7 @@ Anago 的 fork 插件，供 [DeepSeek Harness](https://github.com/deepseek-ai/de
 | `client-ui-fonts-anago` | 内置的 UDEV Gothic、Noto Sans JP 与 Intel One Mono，以及把它们应用到界面文字、代码和终端的选择器 |
 | `client-ui-session-share` | 浏览器窗口之间的会话共享 |
 | `client-ui-settings-web-search` | fork 搜索提供方的设置卡片 |
-| `ui-settings-usage` | 设置中的 **Usage** 节：GitHub Copilot 配额，以及其他提供方的已说明不支持状态 |
+| `ui-settings-usage` | 设置中的 **Usage** 节：GitHub Copilot、OpenAI Codex、xAI 与 OpenCode Go 的用量 |
 | `copilot-oauth` / `xai-oauth` / `openai-codex-oauth` | GitHub Copilot、xAI 与 OpenAI Codex 的登录流程 |
 | `memory` | `memory` 工具及其存储 |
 | `knowledge-common` | `memory` 与 `llm-wiki` 共用的知识存储 |

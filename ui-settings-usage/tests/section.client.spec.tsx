@@ -15,11 +15,16 @@ afterEach(cleanup)
 const t = (key: UsageLocaleKey, params?: Record<string, string | number>) =>
   en[key].replace(/\{(\w+)\}/g, (_match, name: string) => String(params?.[name]))
 
-function renderSection(rows: readonly UsageRow[]) {
+function renderSection(rows: readonly UsageRow[], readAt?: number) {
   const refresh = vi.fn()
   const cancel = vi.fn()
   const props = {
-    t, refresh, cancel, close: vi.fn(), useUsageRows: bindSnapshotSelector(createSnapshotStore(rows)),
+    t,
+    refresh,
+    cancel,
+    close: vi.fn(),
+    useUsageRows: bindSnapshotSelector(createSnapshotStore(rows)),
+    useUsageReadAt: bindSnapshotSelector(createSnapshotStore(readAt)),
   } as unknown as UsageSectionProps
   const view = render(<UsageSection {...props} />)
   return { refresh, cancel, view }
@@ -29,7 +34,7 @@ const meterRow = (meter: UsageMeter): UsageRow => ({ provider: 'github-copilot',
 
 describe('UsageSection', () => {
   it('reads when it opens, abandons the read when it closes, and re-reads on request', () => {
-    const { refresh, cancel, view } = renderSection([{ provider: 'xai', status: 'unsupported', reason: 'no-usage-endpoint' }])
+    const { refresh, cancel, view } = renderSection([{ provider: 'xai', status: 'unsupported', reason: 'disabled' }])
     expect(refresh).toHaveBeenCalledOnce()
     fireEvent.click(screen.getByRole('button', { name: en.refresh }))
     expect(refresh).toHaveBeenCalledTimes(2)
@@ -57,38 +62,78 @@ describe('UsageSection', () => {
     }])
     expect(screen.getByText(en['status.ok'])).toBeTruthy()
     expect(screen.getByText('Plan: individual_pro')).toBeTruthy()
-    expect(screen.getByText('Premium requests: 120.5 of 300 left')).toBeTruthy()
+    expect(screen.getByText('Premium requests: 120.5 of 300 left · 60% used')).toBeTruthy()
     expect(screen.getByText(`Resets: ${new Date(resetAt).toLocaleString()}`)).toBeTruthy()
+  })
+
+  it('says when the shown rows were read, and only once they were', () => {
+    const readAt = Date.parse('2026-11-07T00:00:00.000Z')
+    renderSection([{ provider: 'xai', status: 'ok', meters: [] }], readAt)
+    expect(screen.getByText(`Updated: ${new Date(readAt).toLocaleString()}`)).toBeTruthy()
+    cleanup()
+    renderSection([{ provider: 'xai', status: 'loading' }])
+    expect(screen.queryByText(/Updated:/)).toBeNull()
   })
 
   it.each<[string, UsageMeter, string]>([
     ['an unlimited quota', { id: 'chat', unlimited: true }, 'Chat: unlimited'],
     ['a remaining count alone', { id: 'completions', unlimited: false, remaining: 7 }, 'Completions: 7 left'],
-    ['a percentage alone', { id: 'chat', unlimited: false, percentRemaining: 40.6 }, 'Chat: 41% left'],
+    ['a remaining share alone, as the share used', { id: 'chat', unlimited: false, percentRemaining: 40.6 }, 'Chat: 59% used'],
+    ['a share used', { id: 'weekly', unlimited: false, percentUsed: 12.4 }, 'Weekly: 12% used'],
     ['a quota with an unknown name', { id: 'new_quota', unlimited: false, remaining: 1 }, 'new_quota: 1 left'],
+    ['an amount used alone', { id: 'on_demand', unlimited: false, used: 18.4, unit: 'USD' }, 'On-demand: 18.4 USD used'],
+    ['an amount used against its allowance', { id: 'on_demand', unlimited: false, used: 18.4, entitlement: 50, unit: 'USD' }, 'On-demand: 18.4 USD of 50 USD used'],
+    [
+      'every fact of a spend limit',
+      { id: 'spend_limit', unlimited: false, entitlement: 50, used: 12, remaining: 38, percentUsed: 24, percentRemaining: 76, unit: 'usd' },
+      'Spend limit: 12 usd of 50 usd used · 38 usd left · 24% used',
+    ],
   ])('renders %s', (_name, meter, text) => {
     renderSection([meterRow(meter)])
     expect(screen.getByText(text)).toBeTruthy()
   })
 
-  it('omits a quota the provider reported no value for', () => {
-    renderSection([meterRow({ id: 'chat', unlimited: false })])
-    expect(screen.queryByText(/Chat/)).toBeNull()
+  it('puts a quota\'s own reset time on its line', () => {
+    const resetAt = Date.parse('2026-12-01T00:00:00.000Z')
+    renderSection([meterRow({ id: 'rolling', unlimited: false, percentUsed: 5, resetAt })])
+    expect(screen.getByText(`Rolling window: 5% used · resets ${new Date(resetAt).toLocaleString()}`)).toBeTruthy()
   })
 
-  it.each(['openai-codex', 'xai', 'opencode-go'] as const)('explains why %s is not supported', (provider) => {
-    renderSection([{ provider, status: 'unsupported', reason: 'no-usage-endpoint' }])
-    expect(screen.getByText(en['status.unsupported'])).toBeTruthy()
-    expect(screen.getByText(en[`unsupported.${provider}`])).toBeTruthy()
+  it.each([
+    'spend_limit', 'primary_window', 'secondary_window', 'code_review', 'credits', 'rolling', 'weekly', 'monthly', 'included_credits', 'on_demand', 'prepaid_credits',
+  ] as const)('names the %s quota', (id) => {
+    renderSection([meterRow({ id, unlimited: false, remaining: 1 })])
+    expect(screen.getByText(`${en[`meter.${id}`]}: 1 left`)).toBeTruthy()
+  })
+
+  it.each<[string, UsageMeter]>([
+    ['no value', { id: 'chat', unlimited: false }],
+    ['only a reset time', { id: 'chat', unlimited: false, resetAt: 1 }],
+  ])('omits a quota the provider reported %s for', (_name, meter) => {
+    renderSection([meterRow(meter)])
+    expect(screen.queryByText(/Chat/)).toBeNull()
   })
 
   it('names the profile when reading is turned off', () => {
     renderSection([{ provider: 'github-copilot', status: 'unsupported', reason: 'disabled' }])
+    expect(screen.getByText(en['status.unsupported'])).toBeTruthy()
     expect(screen.getByText(en['unsupported.disabled'])).toBeTruthy()
   })
 
+  it.each(['not-signed-in', 'token-expired', 'renewal-failed', 'token-rejected'] as const)('explains the %s sign-in state', (reason) => {
+    renderSection([{ provider: 'xai', status: 'sign-in-required', reason }])
+    expect(screen.getByText(en['status.sign-in-required'])).toBeTruthy()
+    expect(screen.getByText(en[`signIn.${reason}`])).toBeTruthy()
+  })
+
+  it.each(['github-copilot', 'openai-codex', 'xai', 'opencode-go'] as const)('tells %s how to sign in, offering no action that starts one', (provider) => {
+    renderSection([{ provider, status: 'sign-in-required', reason: 'not-signed-in' }])
+    expect(screen.getByText(en[`signIn.action.${provider}`])).toBeTruthy()
+    expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual([en.refresh])
+  })
+
   it.each([
-    'not-signed-in', 'credential-unusable', 'unauthorized', 'rate-limited', 'timeout', 'network', 'invalid-response', 'host-unavailable',
+    'credential-unusable', 'forbidden', 'rate-limited', 'timeout', 'network', 'invalid-response', 'host-unavailable',
   ] as const)('shows the %s failure', (reason) => {
     renderSection([{ provider: 'github-copilot', status: 'failed', reason }])
     expect(screen.getByText(en['status.failed'])).toBeTruthy()

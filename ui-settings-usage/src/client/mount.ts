@@ -27,7 +27,7 @@ function registerUi(ctx: Context): void {
   ctx.effect(() => () => { controller.cancel() }, 'ui-settings-usage: read cancellation')
   // One face for the entry's lifetime, because the section's open effect depends on these actions' identity.
   const face: UsageSectionInjected = {
-    hooks: { usageRows: controller.rows },
+    hooks: { usageRows: controller.rows, usageReadAt: controller.readAt },
     refresh: () => { void controller.refresh() },
     cancel: () => { controller.cancel() },
   }
