@@ -187,6 +187,11 @@ describe('Copilot usage', () => {
     expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'failed', reason: 'timeout' })
   })
 
+  it('stops at the time limit when the credential store never answers', async () => {
+    const { usage } = service({ timeoutMs: 20, readRecord: () => new Promise(() => { /* The store never settles. */ }) })
+    expect(copilotRow(await read(usage))).toEqual({ provider: 'github-copilot', status: 'failed', reason: 'timeout' })
+  })
+
   it('reports an unreachable provider as a network failure', async () => {
     const api = await fakeApi(respondJson(200, QUOTA))
     await closeFakeApis()

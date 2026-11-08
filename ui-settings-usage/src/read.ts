@@ -28,8 +28,28 @@ export interface ReadLimits {
 }
 
 /**
- * Run one provider read inside its time limit. Only `limits.signal` makes the
- * returned promise reject; every other failure becomes a row.
+ * Stop waiting for work when a signal aborts, leaving the work running.
+ * @param work - the work; a later rejection counts as handled.
+ * @param signal - stops the wait, including when it has already aborted.
+ * @returns the work's result.
+ * @throws The signal's reason when it aborts first.
+ */
+export async function untilAborted<T>(work: Promise<T>, signal: AbortSignal): Promise<T> {
+  const aborted = Promise.withResolvers<never>()
+  const onAbort = (): void => { aborted.reject(signal.reason) }
+  signal.addEventListener('abort', onAbort, { once: true })
+  if (signal.aborted) onAbort()
+  try {
+    return await Promise.race([work, aborted.promise])
+  } finally {
+    signal.removeEventListener('abort', onAbort)
+  }
+}
+
+/**
+ * Run one provider read inside its time limit. The limit holds even for a step
+ * that ignores its signal, such as a credential store or a renewal flow. Only
+ * `limits.signal` makes the returned promise reject; every other failure becomes a row.
  * @param provider - the row's provider.
  * @param limits - the time limit and cancellation signal.
  * @param read - the read, given the signal that covers both.
@@ -42,8 +62,9 @@ export async function readWithinLimit(
   read: (signal: AbortSignal) => Promise<ProviderUsage>,
 ): Promise<ProviderUsage> {
   const deadline = AbortSignal.timeout(limits.timeoutMs)
+  const signal = AbortSignal.any([limits.signal, deadline])
   try {
-    return await read(AbortSignal.any([limits.signal, deadline]))
+    return await untilAborted(read(signal), signal)
   } catch (error) {
     limits.signal.throwIfAborted()
     if (deadline.aborted) return failed(provider, 'timeout')

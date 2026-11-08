@@ -69,7 +69,7 @@ Every field is optional and the defaults work without configuration. Set them on
 |---|---|
 | `not-signed-in` | No credential is stored |
 | `token-expired` | The token expired and this profile has no renewal path: no `authorization` service, or no flow offering a renewal for the record |
-| `renewal-failed` | The token expired and renewing it failed; the stored record is kept, so **Refresh** retries |
+| `renewal-failed` | The token expired and renewing it failed; the stored record is kept, so **Refresh** retries once `minRefreshIntervalMs` has passed |
 | `token-rejected` | The provider answered 401 |
 
 | Failure | Meaning |

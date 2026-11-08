@@ -301,6 +301,15 @@ describe('token renewal', () => {
     })
     expect(rowOf(await read(usage), 'openai-codex')).toEqual({ provider: 'openai-codex', status: 'failed', reason: 'timeout' })
   })
+
+  it('reports a timeout when a renewal ignores the signal', async () => {
+    const { usage } = service({
+      records: new Map([[CODEX_KEY, codexGrant(SECRET, Date.now() - HOUR)]]),
+      config: { openaiCodex: { enabled: true }, timeoutMs: 20 },
+      renew: () => new Promise(() => { /* The flow never settles. */ }),
+    })
+    expect(rowOf(await read(usage), 'openai-codex')).toEqual({ provider: 'openai-codex', status: 'failed', reason: 'timeout' })
+  })
 })
 
 describe('xAI usage', () => {

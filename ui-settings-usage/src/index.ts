@@ -13,6 +13,7 @@ import z from '@deepseek-ai/schemastery'
 import { readCodexUsage } from './codex.ts'
 import { readCopilotUsage } from './copilot.ts'
 import { readOpenCodeGoUsage } from './opencode-go.ts'
+import { untilAborted } from './read.ts'
 import { readXaiUsage } from './xai.ts'
 import type { ProviderUsage, UsageProviderId, UsageReport } from './types.ts'
 
@@ -70,24 +71,6 @@ function providerRead() {
     enabled: z.boolean().default(true),
     endpoint: z.string().pattern(ENDPOINT_PATTERN),
   }).default({ enabled: true })
-}
-
-/**
- * Stop waiting for shared work when one caller cancels, leaving the work running.
- * @param work - the shared work.
- * @param signal - the caller's cancellation.
- * @returns the work's result.
- * @throws The signal's reason when it aborts first.
- */
-async function untilAborted<T>(work: Promise<T>, signal: AbortSignal): Promise<T> {
-  const aborted = Promise.withResolvers<never>()
-  const onAbort = (): void => { aborted.reject(signal.reason) }
-  signal.addEventListener('abort', onAbort, { once: true })
-  try {
-    return await Promise.race([work, aborted.promise])
-  } finally {
-    signal.removeEventListener('abort', onAbort)
-  }
 }
 
 /** Reports each provider's usage to the Settings page. */

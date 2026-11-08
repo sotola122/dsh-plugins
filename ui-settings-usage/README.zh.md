@@ -69,7 +69,7 @@ dsh plugin --profile <profile> add link:/absolute/path/to/plugins/ui-settings-us
 |---|---|
 | `not-signed-in` | 没有存储凭据 |
 | `token-expired` | 令牌已过期，且此配置没有续期路径：未挂载 `authorization` 服务，或没有流程为该记录提供续期 |
-| `renewal-failed` | 令牌已过期且续期失败；已存储的记录会保留，因此**刷新**会重试 |
+| `renewal-failed` | 令牌已过期且续期失败；已存储的记录会保留，因此超过 `minRefreshIntervalMs` 后**刷新**会重试 |
 | `token-rejected` | 提供方返回 401 |
 
 | 失败原因 | 含义 |
