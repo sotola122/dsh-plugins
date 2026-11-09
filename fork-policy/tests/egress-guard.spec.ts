@@ -6,13 +6,13 @@
 import { execFileSync } from 'node:child_process'
 import { lookup } from 'node:dns'
 import dnsPromises from 'node:dns/promises'
-import { copyFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import https from 'node:https'
 import net from 'node:net'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import tls from 'node:tls'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterEach, describe, expect, it } from 'vitest'
 import { forkDefaultPatches, forkLockPatches, guard } from '@anago-harness/fork-policy'
 
@@ -114,6 +114,35 @@ function listenSilently(): Promise<{ port: number; close: () => Promise<void>; r
       })
     })
   })
+}
+
+const deniedChild = "fetch('https://platform.deepseek.com').then(() => console.log('CHILD NOT BLOCKED'), error => console.log('child:' + ((error.cause && error.cause.code) || error.code)))"
+
+/** Load a copied guard in a fresh process and print the child refusal plus NODE_OPTIONS. */
+function runCopiedGuard(setup: string): string {
+  return execFileSync(process.execPath, ['-e', `
+    delete process.env.VITEST
+    delete process.env.NODE_OPTIONS
+    ${setup}
+    const { execFileSync } = require('node:child_process')
+    const out = execFileSync(process.execPath, ['-e', ${JSON.stringify(deniedChild)}], { encoding: 'utf8' })
+    process.stdout.write(out)
+    process.stdout.write('\\nPRELOAD ' + (process.env.NODE_OPTIONS ?? ''))
+  `], { encoding: 'utf8', env: spawnEnv, timeout: 20_000 })
+}
+
+function preloadOption(output: string): string {
+  const line = output.split('\n').find(item => item.startsWith('PRELOAD '))
+  expect(line, output).toBeDefined()
+  return (line ?? '').slice('PRELOAD '.length)
+}
+
+function placeGuard(directory: string): string {
+  mkdirSync(directory, { recursive: true })
+  const copied = join(directory, 'egress-guard.cjs')
+  copyFileSync(guardFile, copied)
+  copyFileSync(denylistFile, join(directory, 'denylist.json'))
+  return copied
 }
 
 describe('fork profile layers', () => {
@@ -392,5 +421,84 @@ describe('egress guard', () => {
       })
     `], { encoding: 'utf8', env: spawnEnv })
     expect(output).toBe('')
+  })
+
+  it('materializes an asar-style path a child can load', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'egress-guard-asar-'))
+    const copied = placeGuard(join(directory, 'resources', 'app.asar', 'fork-policy'))
+    let materializedDir: string | undefined
+    try {
+      const output = runCopiedGuard(`
+        require(${JSON.stringify(copied)})
+        require('node:fs').rmSync(${JSON.stringify(directory)}, { recursive: true, force: true })
+      `)
+      const option = preloadOption(output)
+      const materialized = fileURLToPath(option.slice('--import='.length))
+      materializedDir = dirname(materialized)
+      expect(output).toContain('child:EDSHFORKFORBIDDEN')
+      expect(output).not.toContain('CHILD NOT BLOCKED')
+      expect(output).not.toContain('ERR_MODULE_NOT_FOUND')
+      expect(materialized).not.toContain('app.asar')
+      expect(materialized).toMatch(/dsh-fork-guard-[0-9a-f]{8}[/\\]egress-guard\.cjs$/u)
+      expect(readFileSync(join(materializedDir, 'denylist.json'), 'utf8')).toBe(readFileSync(denylistFile, 'utf8'))
+    } finally {
+      rmSync(directory, { recursive: true, force: true })
+      if (materializedDir !== undefined) rmSync(materializedDir, { recursive: true, force: true })
+    }
+  })
+
+  it('leaves a normal filesystem preload path unchanged', () => {
+    const output = execFileSync(process.execPath, ['-e', `
+      delete process.env.VITEST
+      delete process.env.NODE_OPTIONS
+      require(${JSON.stringify(guardFile)})
+      process.stdout.write(process.env.NODE_OPTIONS ?? '')
+    `], { encoding: 'utf8', env: spawnEnv, timeout: 20_000 })
+    expect(output).toBe(`--import=${pathToFileURL(guardFile).href}`)
+  })
+
+  it('leaves an unpacked archive sibling path unchanged', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'egress-guard-unpacked-'))
+    const copied = placeGuard(join(directory, 'resources', 'app.asar.unpacked', 'fork-policy'))
+    try {
+      const output = execFileSync(process.execPath, ['-e', `
+        delete process.env.VITEST
+        delete process.env.NODE_OPTIONS
+        require(${JSON.stringify(copied)})
+        process.stdout.write(process.env.NODE_OPTIONS ?? '')
+      `], { encoding: 'utf8', env: spawnEnv, timeout: 20_000 })
+      expect(output).toBe(`--import=${pathToFileURL(copied).href}`)
+    } finally {
+      rmSync(directory, { recursive: true, force: true })
+    }
+  })
+
+  it('still materializes a single-file executable preload', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'egress-guard-sea-'))
+    const copied = placeGuard(directory)
+    let materializedDir: string | undefined
+    try {
+      const output = runCopiedGuard(`
+        const Module = require('node:module')
+        const load = Module._load
+        Module._load = function (request, parent, isMain) {
+          if (request === 'node:sea') return { isSea: () => true }
+          return load.apply(this, arguments)
+        }
+        require(${JSON.stringify(copied)})
+        require('node:fs').rmSync(${JSON.stringify(directory)}, { recursive: true, force: true })
+      `)
+      const option = preloadOption(output)
+      const materialized = fileURLToPath(option.slice('--import='.length))
+      materializedDir = dirname(materialized)
+      expect(output).toContain('child:EDSHFORKFORBIDDEN')
+      expect(output).not.toContain('ERR_MODULE_NOT_FOUND')
+      expect(materialized).not.toBe(copied)
+      expect(materialized).toMatch(/dsh-fork-guard-[0-9a-f]{8}[/\\]egress-guard\.cjs$/u)
+      expect(readFileSync(join(materializedDir, 'denylist.json'), 'utf8')).toBe(readFileSync(denylistFile, 'utf8'))
+    } finally {
+      rmSync(directory, { recursive: true, force: true })
+      if (materializedDir !== undefined) rmSync(materializedDir, { recursive: true, force: true })
+    }
   })
 })

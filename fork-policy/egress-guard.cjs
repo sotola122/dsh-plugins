@@ -210,9 +210,9 @@ function install() {
   // because NODE_OPTIONS splits options on spaces and does not honor quoting, so a
   // guard under a path with spaces would otherwise break every child at startup. The
   // test runner sets VITEST; leaving its child options unchanged does not disable the
-  // denylist in the process that loaded this file. A single-file executable stores
-  // this file in a snapshot path a separate Node process cannot load, so it
-  // materializes a real copy first and reports a failure to copy.
+  // denylist in the process that loaded this file. A single-file executable and an
+  // Electron archive store this file where a separate Node process cannot load it,
+  // so the host materializes a real copy first and reports a failure to copy.
   const preload = childPreload()
   if (preload.error !== undefined) reportStartup('child-preload', preload.error)
   const preloadOption = preload.path === undefined ? '' : `--import=${pathToFileURL(preload.path).href}`
@@ -247,10 +247,13 @@ function connectOptions(args) {
 
 /**
  * Resolve the file a Node child process loads before its own entry.
- * @returns The preload path, or the failure that prevented copying it out of a single-file executable.
+ * @returns The preload path, or the failure that prevented copying it out of a single-file executable or an Electron archive.
  */
 function childPreload() {
-  if (!isSea()) return { path: __filename }
+  // `app.asar.unpacked` is a real directory; only a segment ending in `.asar` is an archive.
+  const segments = __filename.split(/[\\/]/u)
+  const archived = segments.some((segment, index) => segment.endsWith('.asar') && index < segments.length - 1)
+  if (!isSea() && !archived) return { path: __filename }
   try {
     return { path: materializeGuard() }
   } catch (error) {
