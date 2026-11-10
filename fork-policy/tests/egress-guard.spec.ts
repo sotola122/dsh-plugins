@@ -14,7 +14,7 @@ import { dirname, join } from 'node:path'
 import tls from 'node:tls'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterEach, describe, expect, it } from 'vitest'
-import { forkDefaultPatches, forkLockPatches, guard } from '@anago-harness/fork-policy'
+import { egressGuardFallbacks, forkDefaultPatches, forkLockPatches, guard } from '@anago-harness/fork-policy'
 
 const guardFile = fileURLToPath(new URL('../egress-guard.cjs', import.meta.url))
 const denylistFile = fileURLToPath(new URL('../denylist.json', import.meta.url))
@@ -500,5 +500,12 @@ describe('egress guard', () => {
       rmSync(directory, { recursive: true, force: true })
       if (materializedDir !== undefined) rmSync(materializedDir, { recursive: true, force: true })
     }
+  })
+
+  it('searches the packaged dsh tree when a desktop bundle rebases the guard require', () => {
+    const candidates = egressGuardFallbacks(join('/app', 'lib'), join('/opt', 'DeepSeek Harness', 'resources'))
+    expect(candidates).toContain(join('/app', 'egress-guard.cjs'))
+    expect(candidates).toContain(join('/app', 'dsh', 'node_modules', '@anago-harness', 'fork-policy', 'egress-guard.cjs'))
+    expect(candidates).toContain(join('/opt', 'DeepSeek Harness', 'resources', 'app.asar', 'dsh', 'node_modules', '@anago-harness', 'fork-policy', 'egress-guard.cjs'))
   })
 })
